@@ -1,37 +1,4 @@
-Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@devAbdulAzizUmar 
-flutter
-/
-flutter
-3.5k
-121k17.2k
-Code
-Issues
-5k+
-Pull requests
-173
-Actions
-Projects
-141
-Wiki
-Security
-Insights
-flutter/.gitignore
-@jmagman
-jmagman Add ephemeral iOS directory to put future generated files (#76830)
-Latest commit d099ae6 on 26 Feb
- History
- 22 contributors
-@gspencergoog@jonahwilliams@xster@jmagman@christopherfujino@mravn-google@goderbauer@yjbanov@shihaohong@pq@mdebbar@MarcusTomlinson
-118 lines (107 sloc)  2.17 KB
-  
 # Miscellaneous
 *.class
 *.lock
