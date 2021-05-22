@@ -162,3 +162,7 @@ API
 Training
 Blog
 About
+*.bin
+*.iml
+*.xml
+*.properties
