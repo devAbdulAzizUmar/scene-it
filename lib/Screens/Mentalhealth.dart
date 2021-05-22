@@ -15,7 +15,7 @@ class _MentalhealthState extends State<Mentalhealth>
     with SingleTickerProviderStateMixin {
   AudioPlayer player;
   AudioCache cache;
-  bool playing = false;
+  bool isPlaying = false;
   IconData playbtn1 = Icons.play_arrow;
   IconData playbtn2 = Icons.play_arrow;
   IconData playbtn3 = Icons.play_arrow;
@@ -92,123 +92,142 @@ class _MentalhealthState extends State<Mentalhealth>
     ),
   ];
 
+  void startPlaying(int index) {
+    if (!isPlaying) {
+      cache.play("$index.mp3");
+      setState(() {
+        playbtn1 = Icons.pause;
+        isPlaying = true;
+      });
+    } else {
+      player.pause();
+      setState(
+        () {
+          playbtn1 = Icons.play_arrow;
+          isPlaying = false;
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Mental Health"),
-        ),
-        body: Container(
-            //
+      appBar: AppBar(
+        title: Text("Mental Health"),
+      ),
+      body: Container(
+        //
 
-            alignment: Alignment.topCenter,
-            decoration: BoxDecoration(color: Colors.white54),
-            child: Padding(
-                padding: EdgeInsets.only(top: 17),
-                child: Container(
-                    child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 12),
-                      alignment: Alignment.bottomLeft,
-                      height: 120,
-                      width: 400,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue[300],
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.6),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: Offset(0, 3),
-                            ),
-                          ]),
-
-                      //Padding(padding:EdgeInsets.only(left:12),
-
-                      ///***Main Headig***///
-
-                      child: Column(children: [
-                        Text(
-                          "Audio Meditations",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 29,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ////Second Text//////
-
-                        Text(
-                          "Let's release some stress by listening to audio meditation!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 21,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.white,
-                          ),
+        alignment: Alignment.topCenter,
+        decoration: BoxDecoration(color: Colors.white54),
+        child: Padding(
+          padding: EdgeInsets.only(top: 17),
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 12),
+                  alignment: Alignment.bottomLeft,
+                  height: 120,
+                  width: 400,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue[300],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.6),
+                          spreadRadius: 4,
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
                         ),
                       ]),
-                    ),
-                    SizedBox(
-                      height: 1,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: audios.length,
-                        itemBuilder: (context, index) {
-                          return AudioContainer(audio: audios[index]);
-                        },
+
+                  //Padding(padding:EdgeInsets.only(left:12),
+
+                  ///***Main Headig***///
+
+                  child: Column(
+                    children: [
+                      Text(
+                        "Audio Meditations",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 29,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
 
-                      // ListView(
-                      //   children:
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ////Second Text//////
 
-//                         [
+                      Text(
+                        "Let's release some stress by listening to audio meditation!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 21,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 1,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: audios.length,
+                    itemBuilder: (context, index) {
+                      return AudioContainer(
+                        audio: audios[index],
+                        color: index.isEven
+                            ? Colors.blueGrey[400]
+                            : Colors.blueGrey[200],
+                        startPlaying: () {
+                          startPlaying(index + 1);
+                        },
+                      );
+                    },
+                  ),
+
+//                       child: ListView(
+//                         children: [
 //                           /////////////////////first/////////////////////////////
-//                           ///
-//                           ///
 
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 65,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.grey.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
+//                           Card(
+//                             child: Container(
+//                               padding: EdgeInsets.symmetric(
+//                                 horizontal: 20,
+//                                 vertical: 5,
+//                               ),
+//                               child: Row(
 //                                 mainAxisAlignment:
 //                                     MainAxisAlignment.spaceBetween,
 //                                 children: [
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/qt.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
+//                                   Container(
+//                                     width: 60,
+//                                     height: 60,
+//                                     child: CircleAvatar(
+//                                       backgroundImage:
+//                                           AssetImage('assets/qt.jpg'),
+//                                       maxRadius: 30,
+//                                       backgroundColor: Colors.green,
+//                                     ),
 //                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   Text(
-//                                     "Quiet Time",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
+//                                   Expanded(
+//                                     child: Text(
+//                                       "Quiet Time",
+//                                       textAlign: TextAlign.center,
+//                                       style: TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 23,
+//                                           fontWeight: FontWeight.bold),
+//                                     ),
 //                                   ),
 //                                   IconButton(
 //                                     icon: Icon(
@@ -219,23 +238,26 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("1.mp3");
 //                                         setState(() {
 //                                           playbtn1 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn1 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
 //                                   ),
-//                                 ]),
+//                                 ],
+//                               ),
+//                             ),
 //                           ),
+
 //                           SizedBox(height: 20),
 //                           /////////////Second//////////////
 //                           Container(
@@ -285,17 +307,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("2.mp3");
 //                                         setState(() {
 //                                           playbtn2 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn2 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -349,17 +371,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("3.mp3");
 //                                         setState(() {
 //                                           playbtn3 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn3 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -410,17 +432,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("4.mp3");
 //                                         setState(() {
 //                                           playbtn4 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn4 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -478,17 +500,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("5.mp3");
 //                                         setState(() {
 //                                           playbtn5 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn5 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -542,17 +564,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("6.mp3");
 //                                         setState(() {
 //                                           playbtn6 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn6 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -609,17 +631,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("1.mp3");
 //                                         setState(() {
 //                                           playbtn7 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn7 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -676,17 +698,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("8.mp3");
 //                                         setState(() {
 //                                           playbtn8 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn8 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -746,17 +768,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("9.mp3");
 //                                         setState(() {
 //                                           playbtn9 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn9 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -813,17 +835,17 @@ class _MentalhealthState extends State<Mentalhealth>
 //                                     splashColor: Colors.blue[100],
 //                                     splashRadius: 40,
 //                                     onPressed: () {
-//                                       if (!playing) {
+//                                       if (!isPlaying) {
 //                                         cache.play("10.mp3");
 //                                         setState(() {
 //                                           playbtn10 = Icons.pause;
-//                                           playing = true;
+//                                           isPlaying = true;
 //                                         });
 //                                       } else {
 //                                         player.pause();
 //                                         setState(() {
 //                                           playbtn10 = Icons.play_arrow;
-//                                           playing = false;
+//                                           isPlaying = false;
 //                                         });
 //                                       }
 //                                     },
@@ -833,8 +855,12 @@ class _MentalhealthState extends State<Mentalhealth>
 //                           SizedBox(height: 20),
 //                         ],
 //                       ),
-                    )
-                  ],
-                )))));
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

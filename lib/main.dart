@@ -9,6 +9,7 @@ import 'package:first_app/Screens/chat-screen.dart';
 import 'package:first_app/Screens/mind-home.dart';
 import 'package:first_app/Screens/select_category_screen.dart';
 import 'package:first_app/Screens/select_sub_category_screen.dart';
+import 'package:first_app/Screens/story-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -20,7 +21,6 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'Models/post.dart';
 
-import 'Screens/audio-meditation.dart';
 import 'Screens/login-screen.dart';
 import 'Screens/signup-screen.dart';
 
@@ -91,10 +91,10 @@ class MyAppState extends State<MyApp> {
               AugmentedRealityScreen(),
           Motivationalquotes.routeName: (context) => Motivationalquotes(),
           MindHomePage.routeName: (context) => MindHomePage(),
-          AudioMeditation.routeName: (context) => AudioMeditation(),
           ChatScreen.routeName: (context) => ChatScreen(),
           IOSAugmentedReality.routeName: (context) => IOSAugmentedReality(),
-          Mentalhealth.routeName: (context) => Mentalhealth()
+          Mentalhealth.routeName: (context) => Mentalhealth(),
+          StoryScreen.routeName: (context) => StoryScreen(),
         },
       ),
     );
