@@ -160,12 +160,15 @@ class _MotivationalquotesState extends State<Motivationalquotes> {
                                     ),
                                   ),
                                   SizedBox(height: 5),
-                                  Text(
-                                    stories[index].subtitle,
-                                    style: TextStyle(
-                                      color: Colors.grey[700],
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                  Flexible(
+                                    child: Text(
+                                      stories[index].subtitle,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.grey[700],
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
                                     ),
                                   ),
                                 ],
