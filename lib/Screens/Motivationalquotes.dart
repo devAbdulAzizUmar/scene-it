@@ -149,29 +149,29 @@ class _MotivationalquotesState extends State<Motivationalquotes> {
                                   ),
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    stories[index].title,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      stories[index].title,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Flexible(
-                                    child: Text(
+                                    SizedBox(height: 5),
+                                    Text(
                                       stories[index].subtitle,
-                                      overflow: TextOverflow.ellipsis,
+                                      overflow: TextOverflow.clip,
                                       style: TextStyle(
                                         color: Colors.grey[700],
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               )
                             ],
                           ),

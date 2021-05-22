@@ -278,7 +278,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           mediaQuery.size.width <= 380
                               ? RaisedButton(
                                   onPressed: () {
-                                    _login("usernameexample", "randompassword");
+                                    _login(_usernameController.text.trim(),
+                                        _passwordController.text.trim());
                                   },
                                   child: RichText(
                                     text: TextSpan(

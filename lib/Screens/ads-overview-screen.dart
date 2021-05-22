@@ -103,9 +103,15 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
               SizedBox(
                 width: 10,
               ),
-              Text(
-                "Scene It",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              Expanded(
+                child: Text(
+                  "Scene It",
+                  overflow: TextOverflow.visible,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
               ),
             ],
           ),
