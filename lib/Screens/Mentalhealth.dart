@@ -139,9 +139,6 @@ class _MentalhealthState extends State<Mentalhealth> {
                           offset: Offset(0, 3),
                         ),
                       ]),
-
-                  //Padding(padding:EdgeInsets.only(left:12),
-
                   child: Column(
                     children: [
                       Text(
