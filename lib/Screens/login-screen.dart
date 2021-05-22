@@ -80,9 +80,15 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           _isLoading = false;
         });
+        print(response.body);
+
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(jsonDecode(response.body)["message"])));
+          SnackBar(
+            content: Text("Incorrect username or password"),
+            backgroundColor: Colors.red,
+          ),
+        );
       } else {
         setState(() {
           _isLoading = false;
