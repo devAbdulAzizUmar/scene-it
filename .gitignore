@@ -4,6 +4,7 @@
 .dart_tool/
 .packages
 build/
+build/ios/Runner.build/Rlease-iphoneos/Runner.build
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 
