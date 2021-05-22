@@ -11,8 +11,7 @@ class Mentalhealth extends StatefulWidget {
   _MentalhealthState createState() => _MentalhealthState();
 }
 
-class _MentalhealthState extends State<Mentalhealth>
-    with SingleTickerProviderStateMixin {
+class _MentalhealthState extends State<Mentalhealth> {
   AudioPlayer player;
   AudioCache cache;
   bool isPlaying = false;
@@ -117,8 +116,6 @@ class _MentalhealthState extends State<Mentalhealth>
         title: Text("Mental Health"),
       ),
       body: Container(
-        //
-
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(color: Colors.white54),
         child: Padding(
@@ -145,8 +142,6 @@ class _MentalhealthState extends State<Mentalhealth>
 
                   //Padding(padding:EdgeInsets.only(left:12),
 
-                  ///***Main Headig***///
-
                   child: Column(
                     children: [
                       Text(
@@ -158,12 +153,9 @@ class _MentalhealthState extends State<Mentalhealth>
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       SizedBox(
                         height: 10,
                       ),
-                      ////Second Text//////
-
                       Text(
                         "Let's release some stress by listening to audio meditation!",
                         textAlign: TextAlign.center,
