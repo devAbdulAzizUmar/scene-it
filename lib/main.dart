@@ -7,8 +7,7 @@ import 'package:first_app/Screens/ar-ios-screen.dart';
 import 'package:first_app/Screens/ar-screen.dart';
 import 'package:first_app/Screens/chat-screen.dart';
 import 'package:first_app/Screens/mind-home.dart';
-import 'package:first_app/Screens/select_category_screen.dart';
-import 'package:first_app/Screens/select_sub_category_screen.dart';
+
 import 'package:first_app/Screens/story-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
 
@@ -84,9 +83,6 @@ class MyAppState extends State<MyApp> {
           AdDetailsScreen.routeName: (context) => AdDetailsScreen(),
           UserScreen.routeName: (context) => UserScreen(),
           AddPostScreen.routeName: (context) => AddPostScreen(),
-          SelectCategoryScreen.routeName: (context) => SelectCategoryScreen(),
-          SelectSubCategoryScreen.routeName: (context) =>
-              SelectSubCategoryScreen(),
           AugmentedRealityScreen.routeName: (context) =>
               AugmentedRealityScreen(),
           Motivationalquotes.routeName: (context) => Motivationalquotes(),
