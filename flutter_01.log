@@ -1,0 +1,428 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run
+
+## exception
+
+ProcessException: ProcessException: The command failed
+Stdout:
+
+Stderr:
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/pubspec.yaml
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/README.md
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/LICENSE
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/AUTHORS
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_empty.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ffi/dynamic_library.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ffi/native_type.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ffi/annotations.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ffi/struct.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ffi/ffi.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/string_conversion.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/chunked_conversion.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/converter.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/ascii.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/line_splitter.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/codec.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/byte_conversion.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/latin1.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/utf.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/json.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/base64.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/encoding.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/html_escape.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/convert/convert.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_interceptors/interceptors.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/typed_data/unmodifiable_typed_data.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/typed_data/typed_data.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/async_error.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/deferred_load.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/zone.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/broadcast_stream_controller.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/timer.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/stream_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/schedule_microtask.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/stream.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/stream_controller.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/async.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/future_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/stream_pipe.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/future.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/async/stream_transformers.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/http_date.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/http_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/websocket.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/overrides.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/http_parser.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/http_headers.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/http_session.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/crypto.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/http.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_http/websocket_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/developer/profiler.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/developer/service.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/developer/extension.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/developer/developer.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/developer/timeline.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_internal/allowed_experiments.json
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/set.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/hash_map.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/linked_list.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/collection.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/iterable.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/linked_hash_set.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/collections.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/queue.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/iterator.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/hash_set.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/list.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/splay_tree.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/maps.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/collection/linked_hash_map.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/js_util/js_util.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/math/point.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/math/random.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/math/math.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/math/rectangle.dart
+        Permission denied
+error:  cannot create /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/math/jenkins_smi_hash.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/window.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/channel_buffers.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/ui.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/natives.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/hooks.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/annotations.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/plugins.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/geometry.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/pointer.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/isolate_name_server.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/lerp.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/compositing.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/text.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/hash_codes.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/semantics.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/ui/painting.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/js/js.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/embedder_config.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/process.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/file_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/io_resource_info.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/file_system_entity.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/file.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/io.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/namespace_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/platform.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/socket.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/io_sink.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/io_service.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/overrides.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/link.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/secure_socket.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/sync_socket.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/string_transformer.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/security_context.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/data_transformer.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/directory_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/platform_impl.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/eventhandler.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/secure_server_socket.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/service_object.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/directory.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/common.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/network_profiling.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/io/stdio.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/string_buffer.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/set.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/print.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/sink.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/map.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/double.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/object.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/expando.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/errors.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/uri.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/null.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/invocation.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/annotations.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/core.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/iterable.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/duration.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/num.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/string_sink.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/identical.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/bool.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/date_time.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/comparable.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/string.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/exceptions.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/iterator.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/stopwatch.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/regexp.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/bigint.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/stacktrace.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/list.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/pattern.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/int.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/type.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/function.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/core/symbol.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/_embedder.yaml
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/print.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/async_cast.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/bytes_builder.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/linked_list.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/errors.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/iterable.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/cast.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/list.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/sort.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/symbol.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/internal/internal.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/isolate/capability.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/isolate/isolate.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/html/html_dart2js.dart
+        Permission denied
+checkdir error:  cannot create /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/wasm
+                 Permission denied
+                 unable to process sky_engine/lib/wasm/.
+checkdir error:  cannot create /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/lib/wasm
+                 Permission denied
+                 unable to process sky_engine/lib/wasm/wasm.dart.
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/sdk_ext/vmservice_server.dart
+        Permission denied
+error:  cannot delete old /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg/sky_engine/sdk_ext/vmservice_io.dart
+        Permission denied
+
+  Command: unzip -o -q /Users/abdulazizumar/Documents/Work/flutter/bin/cache/downloads/storage.googleapis.com/flutter_infra/flutter/2f0af3715217a0c2ada72c717d4ed9178d68f6ed/sky_engine.zip -d /Users/abdulazizumar/Documents/Work/flutter/bin/cache/pkg
+
+```
+#0      RunResult.throwException (package:flutter_tools/src/base/process.dart:172:5)
+#1      _DefaultProcessUtils.runSync (package:flutter_tools/src/base/process.dart:463:17)
+#2      _PosixUtils.unzip (package:flutter_tools/src/base/os.dart:231:19)
+#3      ArtifactUpdater._downloadArchive (package:flutter_tools/src/cache.dart:1512:18)
+#4      _rootRunUnary (dart:async/zone.dart:1198:47)
+#5      _CustomZone.runUnary (dart:async/zone.dart:1100:19)
+#6      _FutureListener.handleValue (dart:async/future_impl.dart:143:18)
+#7      Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:696:45)
+#8      Future._propagateToListeners (dart:async/future_impl.dart:725:32)
+#9      Future._completeWithValue (dart:async/future_impl.dart:529:5)
+#10     Future._asyncCompleteWithValue.<anonymous closure> (dart:async/future_impl.dart:567:7)
+#11     _rootRun (dart:async/zone.dart:1190:13)
+#12     _CustomZone.run (dart:async/zone.dart:1093:19)
+#13     _CustomZone.runGuarded (dart:async/zone.dart:997:7)
+#14     _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1037:23)
+#15     _microtaskLoop (dart:async/schedule_microtask.dart:41:21)
+#16     _startMicrotaskLoop (dart:async/schedule_microtask.dart:50:5)
+#17     _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:118:13)
+#18     _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:169:5)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 1.22.6, on macOS 11.2.1 20D74 darwin-x64, locale en-GB)
+    • Flutter version 1.22.6 at /Users/abdulazizumar/Documents/Work/flutter
+    • Framework revision 9b2d32b605 (4 weeks ago), 2021-01-22 14:36:39 -0800
+    • Engine revision 2f0af37152
+    • Dart version 2.10.5
+
+[!] Android toolchain - develop for Android devices (Android SDK version 30.0.1)
+    • Android SDK at /Users/abdulazizumar/Library/Android/sdk
+    • Platform android-30, build-tools 30.0.1
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    ! Some Android licenses not accepted.  To resolve this, run: flutter doctor --android-licenses
+
+[✓] Xcode - develop for iOS and macOS (Xcode 12.4)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Xcode 12.4, Build version 12D4e
+    • CocoaPods version 1.9.3
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin installed
+    • Dart plugin version 193.7547
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] VS Code (version 1.53.2)
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Flutter extension version 3.17.0
+
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 2 categories.
+```
