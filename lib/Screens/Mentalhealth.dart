@@ -130,7 +130,10 @@ class _MentalhealthState extends State<Mentalhealth> {
                   width: 400,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.blue[300],
+                      gradient: LinearGradient(colors:[
+                    Colors.blue[700],
+                    Colors.blue[300]
+               ]),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.6),
