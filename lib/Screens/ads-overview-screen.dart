@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:first_app/Models/post.dart';
-import 'package:first_app/Screens/add-post-screen.dart';
+import 'package:first_app/Screens/AddPost/add-post-screen.dart';
 
 import 'package:first_app/Screens/login-screen.dart';
 

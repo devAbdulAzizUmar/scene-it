@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:audioplayers/audio_cache.dart';
 
-class Mentalhealth extends StatefulWidget {
+class MeditationScreen extends StatefulWidget {
   static const String routeName = "MentalHealthScreen";
   @override
-  _MentalhealthState createState() => _MentalhealthState();
+  _MeditationScreenState createState() => _MeditationScreenState();
 }
 
-class _MentalhealthState extends State<Mentalhealth> {
+class _MeditationScreenState extends State<MeditationScreen> {
   AudioPlayer player;
   AudioCache cache;
   bool isPlaying = false;
@@ -111,13 +111,13 @@ class _MentalhealthState extends State<Mentalhealth> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery=MediaQuery.of(context);
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mental Health"),
+        title: Text("Meditations"),
       ),
       body: Container(
-         height: mediaQuery.size.height,
+        height: mediaQuery.size.height,
         width: mediaQuery.size.width,
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(color: Colors.white54),
@@ -133,10 +133,8 @@ class _MentalhealthState extends State<Mentalhealth> {
                   width: 400,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(colors:[
-                    Colors.blue[700],
-                    Colors.blue[300]
-               ]),
+                      gradient: LinearGradient(
+                          colors: [Colors.blue[700], Colors.blue[300]]),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.6),
@@ -160,7 +158,7 @@ class _MentalhealthState extends State<Mentalhealth> {
                         height: 10,
                       ),
                       Text(
-                        "Let's release some stress by listening to audio meditation!",
+                        "Let's release some stress by listening to audio meditations!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 21,

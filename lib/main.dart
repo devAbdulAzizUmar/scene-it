@@ -1,12 +1,13 @@
-import 'package:first_app/Screens/Mentalhealth.dart';
+import 'package:first_app/Screens/meditation-screen.dart';
 import 'package:first_app/Screens/MotivationalQuotes.dart';
 import 'package:first_app/Screens/ad-detail-screen.dart';
-import 'package:first_app/Screens/add-post-screen.dart';
+import 'package:first_app/Screens/AddPost/add-post-screen.dart';
 import 'package:first_app/Screens/ads-overview-screen.dart';
 import 'package:first_app/Screens/ar-ios-screen.dart';
 import 'package:first_app/Screens/ar-screen.dart';
 import 'package:first_app/Screens/chat-screen.dart';
 import 'package:first_app/Screens/mind-home.dart';
+import 'package:first_app/Screens/quick-quotes.dart';
 
 import 'package:first_app/Screens/story-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
@@ -89,8 +90,9 @@ class MyAppState extends State<MyApp> {
           MindHomePage.routeName: (context) => MindHomePage(),
           ChatScreen.routeName: (context) => ChatScreen(),
           IOSAugmentedReality.routeName: (context) => IOSAugmentedReality(),
-          Mentalhealth.routeName: (context) => Mentalhealth(),
+          MeditationScreen.routeName: (context) => MeditationScreen(),
           StoryScreen.routeName: (context) => StoryScreen(),
+          QuickQuotesScreen.routeName: (context) => QuickQuotesScreen(),
         },
       ),
     );
