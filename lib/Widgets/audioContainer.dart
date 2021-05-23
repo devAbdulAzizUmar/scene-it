@@ -16,7 +16,6 @@ class AudioContainer extends StatefulWidget {
 }
 
 class _AudioContainerState extends State<AudioContainer> {
-  bool isPlaying = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,14 +44,14 @@ class _AudioContainerState extends State<AudioContainer> {
             ),
             child: IconButton(
               icon: Icon(
-                isPlaying ? Icons.pause : Icons.play_arrow,
+                widget.audio.isPlaying ? Icons.pause : Icons.play_arrow,
                 color: Colors.black,
                 size: 30,
               ),
               onPressed: () {
-                setState(() {
-                  isPlaying = !isPlaying;
-                });
+                // setState(() {
+                //   isPlaying = !isPlaying;
+                // });
                 widget.startPlaying();
               },
             ),

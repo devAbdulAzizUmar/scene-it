@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:first_app/Models/audio.dart';
 import 'package:first_app/Widgets/audioContainer.dart';
+import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:audioplayers/audio_cache.dart';
@@ -43,69 +44,78 @@ class _MeditationScreenState extends State<MeditationScreen> {
       title: "Quiet Time",
       image: 'assets/qt.jpg',
       audioAsset: '1.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "Deep Mediatation",
       image: 'assets/dm.png',
       audioAsset: '2.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "Time Alone",
       image: 'assets/ti.jpg',
       audioAsset: '3.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "In the Light",
       image: 'assets/light.jpg',
       audioAsset: '4.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "In the Moment",
       image: 'assets/moment.jpg',
       audioAsset: '5.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "Eleven Forest",
       image: 'assets/ef.jpg',
       audioAsset: '6.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "Own my own",
       image: 'assets/omo.jpg',
       audioAsset: '7.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "An Ambient Day",
       image: 'assets/ad.jpg',
       audioAsset: '8.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "Peace",
       image: 'assets/peace.jpg',
       audioAsset: '9.mp3',
+      isPlaying: false,
     ),
     Audio(
       title: "Mellow Thoughts",
       image: 'assets/mt.jpg',
       audioAsset: '10.mp3',
+      isPlaying: false,
     ),
   ];
 
   void startPlaying(int index) {
     if (!isPlaying) {
+      MyAppState.playingIndex = index;
       cache.play("$index.mp3");
       setState(() {
-        playbtn1 = Icons.pause;
-        isPlaying = true;
+        audios[index - 1].isPlaying = true;
       });
     } else {
-      player.pause();
-      setState(
-        () {
-          playbtn1 = Icons.play_arrow;
-          isPlaying = false;
-        },
-      );
+      if (MyAppState.playingIndex != index) {
+        player.pause();
+        // cache.play("$index.mp3");
+      } else {
+        player.pause();
+      }
     }
   }
 

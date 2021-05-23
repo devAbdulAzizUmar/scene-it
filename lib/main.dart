@@ -1,3 +1,4 @@
+import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
 import 'package:first_app/Screens/meditation-screen.dart';
 import 'package:first_app/Screens/MotivationalQuotes.dart';
 import 'package:first_app/Screens/ad-detail-screen.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import 'Models/audio.dart';
 import 'Models/post.dart';
 
 import 'Screens/login-screen.dart';
@@ -37,6 +39,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final storage = FlutterSecureStorage();
+  static int playingIndex = 11;
 
   String _token;
   bool _isLoggedin = false;
@@ -93,6 +96,7 @@ class MyAppState extends State<MyApp> {
           MeditationScreen.routeName: (context) => MeditationScreen(),
           StoryScreen.routeName: (context) => StoryScreen(),
           QuickQuotesScreen.routeName: (context) => QuickQuotesScreen(),
+          PickImageScreen.routeName: (context) => PickImageScreen(),
         },
       ),
     );
