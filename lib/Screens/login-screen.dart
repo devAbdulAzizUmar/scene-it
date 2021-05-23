@@ -277,6 +277,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           mediaQuery.size.width <= 380
                               ? RaisedButton(
+                                  color: Colors.blue,
                                   onPressed: () {
                                     _login(_usernameController.text.trim(),
                                         _passwordController.text.trim());
