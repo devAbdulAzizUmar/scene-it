@@ -25,9 +25,9 @@ class _MeditationhomeState extends State<MindHomePage> {
        child:Column(children: [
          SizedBox(height: 15,),
       Container(
-                padding:EdgeInsets.only(top:12),
+               // padding:EdgeInsets.only(top:12),
                    //alignment: Alignment.bottomLeft,
-                   height: 140,
+                   height: 120,
                    width: 390,
                    decoration: BoxDecoration(
                    borderRadius: BorderRadius.circular(10),  
@@ -101,7 +101,7 @@ class _MeditationhomeState extends State<MindHomePage> {
                    decoration: BoxDecoration(
                    borderRadius: BorderRadius.circular(10),  
                     gradient: LinearGradient(colors:[
-                    Colors.blue[700],
+                    Colors.grey[700],
                     Colors.blue[300]
                     ]),
                    boxShadow:[ BoxShadow(color: Colors.grey.withOpacity(0.6),
@@ -149,7 +149,7 @@ class _MeditationhomeState extends State<MindHomePage> {
                    borderRadius: BorderRadius.circular(10),  
                    gradient: LinearGradient(colors:[
                     Colors.blue[300],
-                    Colors.blue[700]
+                    Colors.grey[700]
                ]),
                    boxShadow:[ BoxShadow(color: Colors.grey.withOpacity(0.6),
                    spreadRadius:4,
