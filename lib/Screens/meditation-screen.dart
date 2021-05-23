@@ -13,8 +13,6 @@ class MeditationScreen extends StatefulWidget {
 }
 
 class _MeditationScreenState extends State<MeditationScreen> {
-  AudioPlayer player;
-  AudioCache cache;
   bool isPlaying = false;
   IconData playbtn1 = Icons.play_arrow;
   IconData playbtn2 = Icons.play_arrow;
@@ -30,14 +28,18 @@ class _MeditationScreenState extends State<MeditationScreen> {
   void initState() {
     // ignore: todo
     //TODO: implement initState
+
+    if (MyAppState.isAudioPlaying) {
+      audios[MyAppState.playingIndex].isPlaying = true;
+    }
     super.initState();
-    initPlayer();
+    // initPlayer();
   }
 
-  void initPlayer() {
-    player = AudioPlayer();
-    cache = AudioCache(fixedPlayer: player);
-  }
+  // void initPlayer() {
+  //   player = AudioPlayer();
+  //   cache = AudioCache(fixedPlayer: player);
+  // }
 
   final List<Audio> audios = [
     Audio(
@@ -102,25 +104,38 @@ class _MeditationScreenState extends State<MeditationScreen> {
     ),
   ];
 
-  void startPlaying(int index) {
-    if (!isPlaying) {
-      MyAppState.playingIndex = index;
-      cache.play("$index.mp3");
-      setState(() {
-        audios[index - 1].isPlaying = true;
-      });
-    } else {
-      if (MyAppState.playingIndex != index) {
-        player.pause();
-        // cache.play("$index.mp3");
-      } else {
-        player.pause();
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    print("Currently playing index is: ${MyAppState.playingIndex}");
+    print("Currently audio is playing: ${MyAppState.isAudioPlaying}");
+    void startPlaying(int index) {
+      if (!MyAppState.isAudioPlaying) {
+        MyAppState.isAudioPlaying = true;
+        MyAppState.playingIndex = index;
+        MyAppState.cache.play("${index + 1}.mp3");
+
+        setState(() {
+          audios[index].isPlaying = true;
+        });
+      } else {
+        if (MyAppState.playingIndex == index) {
+          MyAppState.player.pause();
+          MyAppState.isAudioPlaying = false;
+          setState(() {
+            audios[index].isPlaying = false;
+          });
+        } else {
+          setState(() {
+            audios[MyAppState.playingIndex].isPlaying = false;
+            MyAppState.playingIndex = index;
+            audios[index].isPlaying = true;
+          });
+          MyAppState.player.pause();
+          MyAppState.cache.play("${index + 1}.mp3");
+        }
+      }
+    }
+
     final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -192,672 +207,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
                             ? Colors.blueGrey[400]
                             : Colors.blueGrey[200],
                         startPlaying: () {
-                          startPlaying(index + 1);
+                          startPlaying(index);
                         },
                       );
                     },
                   ),
-
-//                       child: ListView(
-//                         children: [
-//                           /////////////////////first/////////////////////////////
-
-//                           Card(
-//                             child: Container(
-//                               padding: EdgeInsets.symmetric(
-//                                 horizontal: 20,
-//                                 vertical: 5,
-//                               ),
-//                               child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   Container(
-//                                     width: 60,
-//                                     height: 60,
-//                                     child: CircleAvatar(
-//                                       backgroundImage:
-//                                           AssetImage('assets/qt.jpg'),
-//                                       maxRadius: 30,
-//                                       backgroundColor: Colors.green,
-//                                     ),
-//                                   ),
-//                                   Expanded(
-//                                     child: Text(
-//                                       "Quiet Time",
-//                                       textAlign: TextAlign.center,
-//                                       style: TextStyle(
-//                                           color: Colors.black,
-//                                           fontSize: 23,
-//                                           fontWeight: FontWeight.bold),
-//                                     ),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn1,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("1.mp3");
-//                                         setState(() {
-//                                           playbtn1 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn1 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
-
-//                           SizedBox(height: 20),
-//                           /////////////Second//////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 70,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.blue[200],
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.white.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(
-//                                     width: 12,
-//                                   ),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/dm.png'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   Text(
-//                                     "Deep Mediatation",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn2,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("2.mp3");
-//                                         setState(() {
-//                                           playbtn2 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn2 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-//                           SizedBox(height: 20),
-// //////////////////Third/////////////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 70,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.grey.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   //   SizedBox(width: 10,),
-
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/ti.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-
-//                                   Text(
-//                                     "Time Alone",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn3,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("3.mp3");
-//                                         setState(() {
-//                                           playbtn3 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn3 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-//                           //////////Fourth///////////////
-//                           SizedBox(height: 20),
-
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 70,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.blue[200],
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.white.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/light.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   Text(
-//                                     "In the Light",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn4,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("4.mp3");
-//                                         setState(() {
-//                                           playbtn4 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn4 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-
-//                           ///////////Fift////////////////////////
-//                           SizedBox(height: 20),
-
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 70,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.grey.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(
-//                                     width: 0,
-//                                   ),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/moment.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 0,
-//                                   ),
-//                                   Text(
-//                                     "In the Moment",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn5,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("5.mp3");
-//                                         setState(() {
-//                                           playbtn5 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn5 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-//                           SizedBox(height: 20),
-//                           /////////////////////Sixth/////////////////////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 65,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.blue[200],
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.white38.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(width: 0),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/ef.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   Text(
-//                                     "Elven Forest",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn6,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("6.mp3");
-//                                         setState(() {
-//                                           playbtn6 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn6 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-
-//                           SizedBox(height: 20),
-//                           /////////////////////Seventh/////////////////////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 65,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.grey.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(
-//                                     width: 0,
-//                                   ),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/omo.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   Text(
-//                                     "Own my own",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn7,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("1.mp3");
-//                                         setState(() {
-//                                           playbtn7 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn7 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-
-//                           SizedBox(height: 20),
-//                           /////////////////////Eight/////////////////////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 65,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.blue[200],
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.white.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(
-//                                     width: 30,
-//                                   ),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/ad.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 25,
-//                                   ),
-//                                   Text(
-//                                     "An Ambient Day ",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn8,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("8.mp3");
-//                                         setState(() {
-//                                           playbtn8 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn8 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-
-//                           SizedBox(height: 20),
-//                           /////////////////////Ninth/////////////////////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 65,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.grey.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(
-//                                     width: 20,
-//                                   ),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/peace.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 50,
-//                                   ),
-//                                   Text(
-//                                     "Peace",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   SizedBox(
-//                                     width: 50,
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn9,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("9.mp3");
-//                                         setState(() {
-//                                           playbtn9 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn9 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-
-//                           SizedBox(height: 20),
-//                           /////////////////////Tenth/////////////////////////////
-//                           Container(
-//                             alignment: Alignment.bottomLeft,
-//                             height: 65,
-//                             width: 350,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: Colors.blue[200],
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color: Colors.white.withOpacity(0.6),
-//                                     spreadRadius: 4,
-//                                     blurRadius: 7,
-//                                     offset: Offset(0, 3),
-//                                   ),
-//                                 ]),
-//                             child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   SizedBox(
-//                                     width: 30,
-//                                   ),
-//                                   CircleAvatar(
-//                                     backgroundImage:
-//                                         AssetImage('assets/mt.jpg'),
-//                                     maxRadius: 30,
-//                                     backgroundColor: Colors.green,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   Text(
-//                                     "Mellow Thoughts",
-//                                     style: TextStyle(
-//                                         color: Colors.black,
-//                                         fontSize: 23,
-//                                         fontWeight: FontWeight.bold),
-//                                   ),
-//                                   IconButton(
-//                                     icon: Icon(
-//                                       playbtn10,
-//                                     ),
-//                                     iconSize: 50,
-//                                     color: Colors.black,
-//                                     splashColor: Colors.blue[100],
-//                                     splashRadius: 40,
-//                                     onPressed: () {
-//                                       if (!isPlaying) {
-//                                         cache.play("10.mp3");
-//                                         setState(() {
-//                                           playbtn10 = Icons.pause;
-//                                           isPlaying = true;
-//                                         });
-//                                       } else {
-//                                         player.pause();
-//                                         setState(() {
-//                                           playbtn10 = Icons.play_arrow;
-//                                           isPlaying = false;
-//                                         });
-//                                       }
-//                                     },
-//                                   ),
-//                                 ]),
-//                           ),
-//                           SizedBox(height: 20),
-//                         ],
-//                       ),
                 )
               ],
             ),

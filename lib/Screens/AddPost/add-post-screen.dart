@@ -3,7 +3,7 @@ import 'package:first_app/Util/form-validation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-enum ImageSource {
+enum Source {
   camera,
   gallery,
 }
@@ -22,7 +22,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
 
   void navigateToImagePickerScreen({
     BuildContext context,
-    ImageSource imageSource,
+    Source imageSource,
   }) {
     Navigator.pushNamed(context, PickImageScreen.routeName,
         arguments: imageSource);
@@ -84,7 +84,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                 child: InkWell(
                   onTap: () {
                     navigateToImagePickerScreen(
-                        context: context, imageSource: ImageSource.camera);
+                        context: context, imageSource: Source.camera);
                   },
                   child: Container(
                     height: 80,
@@ -112,7 +112,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                 child: InkWell(
                   onTap: () {
                     navigateToImagePickerScreen(
-                        context: context, imageSource: ImageSource.gallery);
+                        context: context, imageSource: Source.gallery);
                   },
                   child: Container(
                     height: 80,

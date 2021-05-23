@@ -1,3 +1,5 @@
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
 import 'package:first_app/Screens/meditation-screen.dart';
 import 'package:first_app/Screens/MotivationalQuotes.dart';
@@ -40,6 +42,9 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   final storage = FlutterSecureStorage();
   static int playingIndex = 11;
+  static bool isAudioPlaying = false;
+  static AudioPlayer player;
+  static AudioCache cache;
 
   String _token;
   bool _isLoggedin = false;
@@ -56,7 +61,16 @@ class MyAppState extends State<MyApp> {
   }
 
   @override
+  void dispose() {
+    player.dispose();
+
+    super.dispose();
+  }
+
+  @override
   void initState() {
+    player = AudioPlayer();
+    cache = AudioCache(fixedPlayer: player);
     super.initState();
   }
 
@@ -70,7 +84,7 @@ class MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: LoginScreen(),
+        home: AddPostScreen(),
         // home: _isLoading
         //     ? Center(
         //         child: CircularProgressIndicator(),
