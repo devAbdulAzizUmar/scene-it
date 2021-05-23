@@ -15,11 +15,15 @@ class _MeditationhomeState extends State<MindHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
+   final mediaQuery=MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Meditation"),
       ),
       body: Container(
+        height: mediaQuery.size.height,
+        width: mediaQuery.size.width,
         alignment: Alignment.center,
         decoration: BoxDecoration(color: Colors.white),
        child:Column(children: [

@@ -111,11 +111,14 @@ class _MentalhealthState extends State<Mentalhealth> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery=MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Mental Health"),
       ),
       body: Container(
+         height: mediaQuery.size.height,
+        width: mediaQuery.size.width,
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(color: Colors.white54),
         child: Padding(
@@ -169,7 +172,7 @@ class _MentalhealthState extends State<Mentalhealth> {
                   ),
                 ),
                 SizedBox(
-                  height: 1,
+                  height: 20,
                 ),
                 Expanded(
                   child: ListView.builder(

@@ -11,6 +11,7 @@ class Motivationalquotes extends StatefulWidget {
 class _MotivationalquotesState extends State<Motivationalquotes> {
   @override
   Widget build(BuildContext context) {
+    final mediaQuery=MediaQuery.of(context);
     final List<MotivationalStory> stories = [
       MotivationalStory(
         title: "Walt Disney",
@@ -61,11 +62,14 @@ class _MotivationalquotesState extends State<Motivationalquotes> {
         storyImage: 'assets/storyimages/lindaStory.jpg',
       ),
     ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Motivational Stories"),
       ),
       body: Container(
+         height: mediaQuery.size.height,
+        width: mediaQuery.size.width,
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(color: Colors.white54),
         child: Padding(
