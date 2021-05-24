@@ -36,8 +36,9 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     String avatarString = '';
-    if (username == "Abdul Aziz") {
+    if (username == "AbdulAziz") {
       avatarString = 'assets/aziz.jpeg';
     } else if (username == 'Karishma') {
       avatarString = 'assets/karishma.jpeg';
