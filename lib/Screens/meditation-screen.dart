@@ -1,10 +1,8 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:first_app/Models/audio.dart';
 import 'package:first_app/Widgets/audioContainer.dart';
 import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:audioplayers/audio_cache.dart';
 
 class MeditationScreen extends StatefulWidget {
   static const String routeName = "MentalHealthScreen";
@@ -14,32 +12,14 @@ class MeditationScreen extends StatefulWidget {
 
 class _MeditationScreenState extends State<MeditationScreen> {
   bool isPlaying = false;
-  IconData playbtn1 = Icons.play_arrow;
-  IconData playbtn2 = Icons.play_arrow;
-  IconData playbtn3 = Icons.play_arrow;
-  IconData playbtn4 = Icons.play_arrow;
-  IconData playbtn5 = Icons.play_arrow;
-  IconData playbtn6 = Icons.play_arrow;
-  IconData playbtn7 = Icons.play_arrow;
-  IconData playbtn8 = Icons.play_arrow;
-  IconData playbtn9 = Icons.play_arrow;
-  IconData playbtn10 = Icons.play_arrow;
+
   @override
   void initState() {
-    // ignore: todo
-    //TODO: implement initState
-
     if (MyAppState.isAudioPlaying) {
       audios[MyAppState.playingIndex].isPlaying = true;
     }
     super.initState();
-    // initPlayer();
   }
-
-  // void initPlayer() {
-  //   player = AudioPlayer();
-  //   cache = AudioCache(fixedPlayer: player);
-  // }
 
   final List<Audio> audios = [
     Audio(

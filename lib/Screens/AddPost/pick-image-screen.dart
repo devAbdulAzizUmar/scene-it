@@ -15,46 +15,50 @@ class _PickImageScreenState extends State<PickImageScreen> {
   File image;
   ImagePicker picker = ImagePicker();
 
-  getImageFromGallery() async {
-    PickedFile galleryImage =
-        await picker.getImage(source: ImageSource.gallery);
-    if (galleryImage == null) {
-      Navigator.pop(context);
-    } else {
-      setState(() {
-        image = File(galleryImage.path);
-      });
-    }
-  }
-
-  getImageFromCamera() async {
-    PickedFile cameraImage = await picker.getImage(source: ImageSource.camera);
-    if (cameraImage == null) {
-      Navigator.pop(context);
-    } else {
-      setState(() {
-        image = File(cameraImage.path);
-      });
-    }
-  }
-
   Source imageSource;
 
   bool isInit = true;
   @override
-  void didChangeDependencies() {
-    if (isInit) {
-      isInit = false;
-      imageSource = ModalRoute.of(context).settings.arguments as Source;
-      imageSource == Source.camera
-          ? getImageFromCamera()
-          : getImageFromGallery();
-    }
-    super.didChangeDependencies();
-  }
+  // void didChangeDependencies() {
+  //   if (isInit) {
+  //     isInit = false;
+  //     imageSource = ModalRoute.of(context).settings.arguments as Source;
+  //     imageSource == Source.camera
+  //         ? getImageFromCamera()
+  //         : getImageFromGallery();
+  //   }
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    getImageFromGallery() async {
+      PickedFile galleryImage =
+          await picker.getImage(source: ImageSource.gallery).then((value) {
+        print("COmplete");
+      });
+
+      print(galleryImage);
+      if (galleryImage.path == null) {
+        Navigator.pop(context);
+      } else {
+        setState(() {
+          image = File(galleryImage.path);
+        });
+      }
+    }
+
+    getImageFromCamera() async {
+      PickedFile cameraImage =
+          await picker.getImage(source: ImageSource.camera);
+      if (cameraImage == null) {
+      } else {
+        setState(() {
+          image = File(cameraImage.path);
+        });
+      }
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Add an Image"),

@@ -37,13 +37,14 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
     PickedFile galleryImage =
         await picker.getImage(source: source).whenComplete(() {
       print("complete");
+    }).onError((error, stackTrace) {
+      print("error");
     });
     if (galleryImage == null) {
-      print("It's coming Cancel");
-      Navigator.pop(context);
+      print("Fail");
     } else {
       setState(() {
-        print("It's coming here");
+        print("set image");
         image = File(galleryImage.path);
       });
     }
@@ -264,11 +265,16 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
         _currentStep++;
       });
     }
+    if (_currentStep == steps().length - 1) {
+      print("Submit!");
+    }
   }
 
   void _setStep(int currentStep) {
-    setState(() {
-      _currentStep = currentStep;
-    });
+    setState(
+      () {
+        _currentStep = currentStep;
+      },
+    );
   }
 }
