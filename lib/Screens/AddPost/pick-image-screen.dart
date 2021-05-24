@@ -18,25 +18,34 @@ class _PickImageScreenState extends State<PickImageScreen> {
   getImageFromGallery() async {
     PickedFile galleryImage =
         await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      image = File(galleryImage.path);
-    });
+    if (galleryImage == null) {
+      Navigator.pop(context);
+    } else {
+      setState(() {
+        image = File(galleryImage.path);
+      });
+    }
   }
 
   getImageFromCamera() async {
     PickedFile cameraImage = await picker.getImage(source: ImageSource.camera);
-    setState(() {
-      image = File(cameraImage.path);
-    });
+    if (cameraImage == null) {
+      Navigator.pop(context);
+    } else {
+      setState(() {
+        image = File(cameraImage.path);
+      });
+    }
   }
+
+  Source imageSource;
 
   bool isInit = true;
   @override
   void didChangeDependencies() {
     if (isInit) {
       isInit = false;
-      final Source imageSource =
-          ModalRoute.of(context).settings.arguments as Source;
+      imageSource = ModalRoute.of(context).settings.arguments as Source;
       imageSource == Source.camera
           ? getImageFromCamera()
           : getImageFromGallery();
@@ -52,7 +61,25 @@ class _PickImageScreenState extends State<PickImageScreen> {
         ),
         body: Center(
           child: image == null
-              ? CircularProgressIndicator.adaptive()
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("No image selected."),
+                    TextButton(
+                      onPressed: () {
+                        imageSource == Source.camera
+                            ? getImageFromCamera()
+                            : getImageFromGallery();
+                      },
+                      child: Text(
+                        "Try again",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               : Image.file(image),
         ));
   }

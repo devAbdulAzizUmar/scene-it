@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
 import 'package:first_app/Util/form-validation.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   int _currentStep = 0;
   String title = '';
   String description = '';
+  File image;
 
   void navigateToImagePickerScreen({
     BuildContext context,
@@ -26,6 +29,24 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   }) {
     Navigator.pushNamed(context, PickImageScreen.routeName,
         arguments: imageSource);
+  }
+
+  getImage(ImageSource source) async {
+    ImagePicker picker = ImagePicker();
+
+    PickedFile galleryImage =
+        await picker.getImage(source: source).whenComplete(() {
+      print("complete");
+    });
+    if (galleryImage == null) {
+      print("It's coming Cancel");
+      Navigator.pop(context);
+    } else {
+      setState(() {
+        print("It's coming here");
+        image = File(galleryImage.path);
+      });
+    }
   }
 
   List<Step> steps() {
@@ -83,8 +104,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                 color: Colors.grey[300],
                 child: InkWell(
                   onTap: () {
-                    navigateToImagePickerScreen(
-                        context: context, imageSource: Source.camera);
+                    getImage(ImageSource.camera);
                   },
                   child: Container(
                     height: 80,
@@ -111,8 +131,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                 color: Colors.grey[300],
                 child: InkWell(
                   onTap: () {
-                    navigateToImagePickerScreen(
-                        context: context, imageSource: Source.gallery);
+                    getImage(ImageSource.gallery);
                   },
                   child: Container(
                     height: 80,
@@ -166,14 +185,64 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
     );
     return Scaffold(
       appBar: appBar,
-      body: Form(
-        child: Stepper(
-          steps: steps(),
-          type: StepperType.vertical,
-          currentStep: _currentStep,
-          onStepTapped: allowContinue() ? _setStep : null,
-          onStepContinue: allowContinue() ? _continue : null,
-          onStepCancel: _cancel,
+      body: SingleChildScrollView(
+        child: Container(
+          height: mediaQuery.size.height,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Form(
+                  child: Stepper(
+                    physics: NeverScrollableScrollPhysics(),
+                    steps: steps(),
+                    type: StepperType.vertical,
+                    currentStep: _currentStep,
+                    onStepTapped: allowContinue() ? _setStep : null,
+                    onStepContinue: allowContinue() ? _continue : null,
+                    onStepCancel: _cancel,
+                  ),
+                ),
+              ),
+              image == null
+                  ? Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text("No image selected."),
+                      ),
+                    )
+                  : Expanded(
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              bottom: 10,
+                              top: 10,
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Image.file(image),
+                          ),
+                          Positioned(
+                              top: 5,
+                              right: 5,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                ),
+                                color: Colors.red,
+                                onPressed: () {
+                                  setState(() {
+                                    image = null;
+                                  });
+                                },
+                              ))
+                        ],
+                      ),
+                    )
+            ],
+          ),
         ),
       ),
     );
