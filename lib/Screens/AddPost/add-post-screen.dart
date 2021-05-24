@@ -1,5 +1,12 @@
+import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
 import 'package:first_app/Util/form-validation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+enum Source {
+  camera,
+  gallery,
+}
 
 class AddPostScreen extends StatefulWidget {
   static const routeName = "AddPostScreen";
@@ -12,6 +19,14 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   int _currentStep = 0;
   String title = '';
   String description = '';
+
+  void navigateToImagePickerScreen({
+    BuildContext context,
+    Source imageSource,
+  }) {
+    Navigator.pushNamed(context, PickImageScreen.routeName,
+        arguments: imageSource);
+  }
 
   List<Step> steps() {
     return [
@@ -61,25 +76,62 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
         title: Text("Add Image (optional)"),
         content: Container(
           height: 100,
-          color: Colors.red,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Card(
+                color: Colors.grey[300],
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    navigateToImagePickerScreen(
+                        context: context, imageSource: Source.camera);
+                  },
                   child: Container(
                     height: 80,
                     width: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.camera_alt_outlined,
+                          size: 35,
+                        ),
+                        Text(
+                          "Camera",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               Card(
+                color: Colors.grey[300],
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    navigateToImagePickerScreen(
+                        context: context, imageSource: Source.gallery);
+                  },
                   child: Container(
                     height: 80,
                     width: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.image_outlined,
+                          size: 35,
+                        ),
+                        Text(
+                          "Gallery",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

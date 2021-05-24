@@ -11,7 +11,7 @@ class Motivationalquotes extends StatefulWidget {
 class _MotivationalquotesState extends State<Motivationalquotes> {
   @override
   Widget build(BuildContext context) {
-    final mediaQuery=MediaQuery.of(context);
+    final mediaQuery = MediaQuery.of(context);
     final List<MotivationalStory> stories = [
       MotivationalStory(
         title: "Walt Disney",
@@ -68,7 +68,7 @@ class _MotivationalquotesState extends State<Motivationalquotes> {
         title: Text("Motivational Stories"),
       ),
       body: Container(
-         height: mediaQuery.size.height,
+        height: mediaQuery.size.height,
         width: mediaQuery.size.width,
         alignment: Alignment.topCenter,
         decoration: BoxDecoration(color: Colors.white54),
@@ -78,18 +78,15 @@ class _MotivationalquotesState extends State<Motivationalquotes> {
             child: Column(
               children: [
                 Container(
-                    padding: EdgeInsets.only(
-                      top: 12,
-                    ),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                     alignment: Alignment.center,
-                    height: 100,
-                    width: 400,
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    constraints: BoxConstraints(minHeight: 100),
+                    width: mediaQuery.size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                         gradient: LinearGradient(colors:[
-                    Colors.blue[700],
-                    Colors.blue[300]
-               ]),
+                        gradient: LinearGradient(
+                            colors: [Colors.blue[700], Colors.blue[300]]),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.6),

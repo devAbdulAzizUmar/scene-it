@@ -30,6 +30,16 @@ class QuickQuotesScreen extends StatelessWidget {
       quote: "Believe you can and you're halfway there.",
       author: "Jimmy Dean",
     ),
+    Quote(
+      quote:
+          "We must be willing to let go of the life we planned so as to have the life that is waiting for us.",
+      author: "Joseph Campbell",
+    ),
+    Quote(
+      quote:
+          "Happiness often sneaks in through a door you didn't know you left open.",
+      author: "John Barrymore",
+    ),
   ];
   @override
   Widget build(BuildContext context) {
