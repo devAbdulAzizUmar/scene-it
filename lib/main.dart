@@ -84,7 +84,7 @@ class MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: AddPostScreen(),
+        home: LoginScreen(),
         // home: _isLoading
         //     ? Center(
         //         child: CircularProgressIndicator(),

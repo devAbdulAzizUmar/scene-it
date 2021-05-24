@@ -62,26 +62,14 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
               });
             });
 
-
           }
         });
 
       }
 
       super.didChangeDependencies();
-
-      final postsProvider = Provider.of<PostsProvider>(context, listen: true);
-      posts = postsProvider.items;
-      print("before if in build posts is $posts");
-
-      if (firstLoad==true) {
-        postsAfterSearch = posts;
-        firstLoad = false;
-        print("in if postsaftersearch is$postsAfterSearch");
-      }
-
-
   }
+
 
   @override
   void dispose() {
@@ -93,7 +81,11 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
   Widget build(BuildContext context) {
     //Getting a reference to provider to listen to changes.
     final postsProvider = Provider.of<PostsProvider>(context, listen: true);
+    posts = postsProvider.items;
 
+    if(firstLoad){
+      postsAfterSearch = posts;
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -159,12 +151,12 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
               onRefresh: () {
                 return postsProvider.getInitialPosts();
               },
-              child: bulidList(),
+              child: buildList(),
             ),
     );
   }
 
-  Widget bulidList() {
+  Widget buildList() {
     return ListView.builder(
 
       controller: _scrollController,
@@ -191,19 +183,20 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
                 );
         }
 
-        return index == 0 ? _searchBar(index) : _showPosts(index-1);
+        return index == 0 ? _searchBar() : _showPosts(index-1);
 
       },
     );
   }
 
-  Widget _searchBar(index){
+  Widget _searchBar(){
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         decoration: InputDecoration(
           hintText: "Search by location"
+
         ),
 
        onChanged: (text){
@@ -216,29 +209,33 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
               return searchResult.contains(text);
 
             }).toList();
-
           });
-
-          print("I'm in setState of onChanged $postsAfterSearch and my body is ${postsAfterSearch[0].body}");
-
         },
-
       ),
-
     );
   }
 
   Widget _showPosts(index){
 
+    var namePostList;
+    if(firstLoad == true){
+      namePostList = posts;
+      firstLoad = false;
+    }
+    else
+      {
+        namePostList = postsAfterSearch;
+      }
+
     return PostItem(
       currentScreen: CurrentScreen.overviewScreen,
-      title: postsAfterSearch[index].title,
-      body: postsAfterSearch[index].body,
-      imageUrls: postsAfterSearch[index].imageUrls,
-      username: postsAfterSearch[index].username,
-      userId: postsAfterSearch[index].userID,
-      postID: postsAfterSearch[index].postID,
-      postTime: postsAfterSearch[index].postTime,
+      title: namePostList[index].title,
+      body: namePostList[index].body,
+      imageUrls: namePostList[index].imageUrls,
+      username: namePostList[index].username,
+      userId: namePostList[index].userID,
+      postID: namePostList[index].postID,
+      postTime: namePostList[index].postTime,
     );
 }
 }
