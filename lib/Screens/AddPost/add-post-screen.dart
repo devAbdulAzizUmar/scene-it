@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:first_app/Models/user.dart';
 import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
+import 'package:first_app/Util/api.dart';
 import 'package:first_app/Util/form-validation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,8 +22,100 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   int _currentStep = 0;
   String title = '';
+  String location = '';
   String description = '';
   File image;
+  bool isLoading = false;
+  String loadingText = '';
+  String imageUrl = '';
+
+  @override
+  Widget build(BuildContext context) {
+    // print("Current step: $_currentStep");
+    final mediaQuery = MediaQuery.of(context);
+
+    AppBar appBar = AppBar(
+      title: Text("Sell Your Item"),
+    );
+    return Scaffold(
+      appBar: appBar,
+      body: SingleChildScrollView(
+        child: Container(
+          height: mediaQuery.size.height,
+          child: isLoading
+              ? Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator.adaptive(),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(loadingText),
+                    ],
+                  ),
+                )
+              : Column(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Form(
+                        child: Stepper(
+                          physics: NeverScrollableScrollPhysics(),
+                          steps: steps(),
+                          type: StepperType.vertical,
+                          currentStep: _currentStep,
+                          onStepTapped: allowContinue() ? _setStep : null,
+                          onStepContinue: allowContinue() ? _continue : null,
+                          onStepCancel: _cancel,
+                        ),
+                      ),
+                    ),
+                    image == null
+                        ? Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text("No image selected."),
+                            ),
+                          )
+                        : Expanded(
+                            child: Stack(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    bottom: 10,
+                                    top: 10,
+                                  ),
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Image.file(image),
+                                ),
+                                Positioned(
+                                    top: 5,
+                                    right: 5,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                      ),
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        setState(() {
+                                          image = null;
+                                        });
+                                      },
+                                    ))
+                              ],
+                            ),
+                          )
+                  ],
+                ),
+        ),
+      ),
+    );
+  }
+
+///////////////////////////////////////////////////
 
   void navigateToImagePickerScreen({
     BuildContext context,
@@ -31,21 +125,81 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
         arguments: imageSource);
   }
 
-  getImage(ImageSource source) async {
-    ImagePicker picker = ImagePicker();
-
-    PickedFile galleryImage =
-        await picker.getImage(source: source).whenComplete(() {
-      print("complete");
-    }).onError((error, stackTrace) {
-      print("error");
-    });
-    if (galleryImage == null) {
-      print("Fail");
+  void _cancel() {
+    if (_currentStep == 0) {
+      Navigator.pop(context);
     } else {
       setState(() {
-        print("set image");
-        image = File(galleryImage.path);
+        _currentStep = 0;
+      });
+    }
+  }
+
+  void _setStep(int currentStep) {
+    setState(
+      () {
+        _currentStep = currentStep;
+      },
+    );
+  }
+
+  void submit() async {
+    if (image != null) {
+      String signedUrl = '';
+      setState(() {
+        isLoading = true;
+        loadingText = "Getting url...";
+      });
+
+      try {
+        signedUrl = await API.getSignedUrl();
+
+        setState(
+          () {
+            loadingText = "Uploading image...";
+          },
+        );
+        await API.uploadImage(
+          signedUrl: signedUrl,
+          image: image.readAsBytesSync(),
+        );
+        setState(
+          () {
+            loadingText = "adding post...";
+          },
+        );
+
+        String imageUrl = '${signedUrl.split("jpg")[0]}jpg';
+        await API.uploadPost(
+          title: title,
+          description: description,
+          location: location,
+          imageUrls: [imageUrl],
+        );
+        setState(
+          () {
+            isLoading = false;
+            loadingText = "'adding post...'";
+          },
+        );
+      } catch (e) {
+        print(e);
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  void _continue() {
+    if (_currentStep == steps().length - 1) {
+      submit();
+
+      print("Submit!");
+    }
+    if (_currentStep < steps().length - 1) {
+      setState(() {
+        _currentStep++;
       });
     }
   }
@@ -72,7 +226,11 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
       ),
       Step(
         title: Text("Location"),
-        content: TextFormField(),
+        content: TextFormField(
+          onChanged: (value) {
+            location = value;
+          },
+        ),
         isActive: _currentStep == 1,
         state: _currentStep == 1 ? StepState.editing : StepState.complete,
       ),
@@ -177,104 +335,22 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
       return true;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+  getImage(ImageSource source) async {
+    ImagePicker picker = ImagePicker();
 
-    AppBar appBar = AppBar(
-      title: Text("Sell Your Item"),
-    );
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
-        child: Container(
-          height: mediaQuery.size.height,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Form(
-                  child: Stepper(
-                    physics: NeverScrollableScrollPhysics(),
-                    steps: steps(),
-                    type: StepperType.vertical,
-                    currentStep: _currentStep,
-                    onStepTapped: allowContinue() ? _setStep : null,
-                    onStepContinue: allowContinue() ? _continue : null,
-                    onStepCancel: _cancel,
-                  ),
-                ),
-              ),
-              image == null
-                  ? Expanded(
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text("No image selected."),
-                      ),
-                    )
-                  : Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                              bottom: 10,
-                              top: 10,
-                            ),
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Image.file(image),
-                          ),
-                          Positioned(
-                              top: 5,
-                              right: 5,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                ),
-                                color: Colors.red,
-                                onPressed: () {
-                                  setState(() {
-                                    image = null;
-                                  });
-                                },
-                              ))
-                        ],
-                      ),
-                    )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _cancel() {
-    if (_currentStep == 0) {
-      Navigator.pop(context);
+    PickedFile galleryImage =
+        await picker.getImage(source: source).whenComplete(() {
+      print("complete");
+    }).onError((error, stackTrace) {
+      print("error");
+    });
+    if (galleryImage == null) {
+      print("Fail");
     } else {
       setState(() {
-        _currentStep = 0;
+        print("set image");
+        image = File(galleryImage.path);
       });
     }
-  }
-
-  void _continue() {
-    if (_currentStep < steps().length - 1) {
-      setState(() {
-        _currentStep++;
-      });
-    }
-    if (_currentStep == steps().length - 1) {
-      print("Submit!");
-    }
-  }
-
-  void _setStep(int currentStep) {
-    setState(
-      () {
-        _currentStep = currentStep;
-      },
-    );
   }
 }

@@ -32,44 +32,41 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
   @override
   void didChangeDependencies() {
-      //Loading all posts from the API before rendering the UI
-      if (isInit) {
-        Provider.of<PostsProvider>(context).getInitialPosts().then((response) {
-          setState(() {
-            isLoading = false;
+    //Loading all posts from the API before rendering the UI
+    if (isInit) {
+      Provider.of<PostsProvider>(context).getInitialPosts().then((response) {
+        setState(() {
+          isLoading = false;
+        });
+      });
+
+      isInit = false;
+      _scrollController.addListener(() {
+        if ((_scrollController.position.outOfRange ||
+                _scrollController.position.atEdge) &&
+            listHasDoneLoading) {
+          listHasDoneLoading = false;
+          Future.delayed(Duration(seconds: 1)).whenComplete(() {
+            listHasDoneLoading = true;
           });
-        });
 
-        isInit = false;
-        _scrollController.addListener(() {
-          if ((_scrollController.position.outOfRange ||
-              _scrollController.position.atEdge) &&
-              listHasDoneLoading) {
-            listHasDoneLoading = false;
-            Future.delayed(Duration(seconds: 1)).whenComplete(() {
-              listHasDoneLoading = true;
-            });
+          setState(() {
+            isLoadingMore = true;
+          });
 
+          Provider.of<PostsProvider>(context, listen: false)
+              .getMorePosts(posts.last.postID)
+              .then((_) {
             setState(() {
-              isLoadingMore = true;
+              isLoadingMore = false;
             });
+          });
+        }
+      });
+    }
 
-            Provider.of<PostsProvider>(context, listen: false)
-                .getMorePosts(posts.last.postID)
-                .then((_) {
-              setState(() {
-                isLoadingMore = false;
-              });
-            });
-
-          }
-        });
-
-      }
-
-      super.didChangeDependencies();
+    super.didChangeDependencies();
   }
-
 
   @override
   void dispose() {
@@ -82,8 +79,8 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     //Getting a reference to provider to listen to changes.
     final postsProvider = Provider.of<PostsProvider>(context, listen: true);
     posts = postsProvider.items;
-
-    if(firstLoad){
+    print(posts.length);
+    if (firstLoad) {
       postsAfterSearch = posts;
     }
 
@@ -158,13 +155,10 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
   Widget buildList() {
     return ListView.builder(
-
       controller: _scrollController,
       itemCount: postsAfterSearch.length + 2,
-
       itemBuilder: (context, index) {
-
-         if (index == postsAfterSearch.length+1) {
+        if (index == postsAfterSearch.length + 1) {
           return isLoadingMore
               ? Container(
                   height: 80,
@@ -183,31 +177,23 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
                 );
         }
 
-        return index == 0 ? _searchBar() : _showPosts(index-1);
-
+        return index == 0 ? _searchBar() : _showPosts(index - 1);
       },
     );
   }
 
-  Widget _searchBar(){
-
+  Widget _searchBar() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
-        decoration: InputDecoration(
-          hintText: "Search by location"
-
-        ),
-
-       onChanged: (text){
+        decoration: InputDecoration(hintText: "Search by location"),
+        onChanged: (text) {
           text.toLowerCase();
 
           setState(() {
-            postsAfterSearch = posts.where((post){
-
+            postsAfterSearch = posts.where((post) {
               var searchResult = post.username.toLowerCase();
               return searchResult.contains(text);
-
             }).toList();
           });
         },
@@ -215,17 +201,14 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     );
   }
 
-  Widget _showPosts(index){
-
+  Widget _showPosts(index) {
     var namePostList;
-    if(firstLoad == true){
+    if (firstLoad == true) {
       namePostList = posts;
       firstLoad = false;
+    } else {
+      namePostList = postsAfterSearch;
     }
-    else
-      {
-        namePostList = postsAfterSearch;
-      }
 
     return PostItem(
       currentScreen: CurrentScreen.overviewScreen,
@@ -237,5 +220,5 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
       postID: namePostList[index].postID,
       postTime: namePostList[index].postTime,
     );
-}
+  }
 }
