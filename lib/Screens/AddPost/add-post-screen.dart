@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:first_app/Models/user.dart';
 import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
 import 'package:first_app/Util/api.dart';
 import 'package:first_app/Util/form-validation.dart';

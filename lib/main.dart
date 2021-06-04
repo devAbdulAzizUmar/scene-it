@@ -79,8 +79,8 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     print("building main");
 
-    return ChangeNotifierProvider<PostsProvider>(
-      create: (ctx) => PostsProvider(),
+    return ChangeNotifierProvider.value(
+      value: PostsProvider(),
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blue,

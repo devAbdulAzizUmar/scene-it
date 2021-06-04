@@ -80,12 +80,13 @@ class PostsProvider with ChangeNotifier {
     );
 
     List<Post> initialPosts = [];
+    initialPosts.clear();
+    _posts.clear();
+    notifyListeners();
 
     for (int i = 0; i < posts.length; i++) {
       var timePassed =
           DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
-
-      print(posts[i]);
 
       print(timeAgo.format(timePassed));
       initialPosts.add(
@@ -102,7 +103,7 @@ class PostsProvider with ChangeNotifier {
         ),
       );
     }
-    _posts.clear();
+
     _posts = [...initialPosts];
     notifyListeners();
   }

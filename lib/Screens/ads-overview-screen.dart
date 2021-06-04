@@ -80,6 +80,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     final postsProvider = Provider.of<PostsProvider>(context, listen: true);
     posts = postsProvider.items;
     print(posts.length);
+
     if (firstLoad) {
       postsAfterSearch = posts;
     }
@@ -156,6 +157,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
   Widget buildList() {
     return ListView.builder(
       controller: _scrollController,
+      cacheExtent: 0,
       itemCount: postsAfterSearch.length + 2,
       itemBuilder: (context, index) {
         if (index == postsAfterSearch.length + 1) {
@@ -212,13 +214,13 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
     return PostItem(
       currentScreen: CurrentScreen.overviewScreen,
-      title: namePostList[index].title,
-      body: namePostList[index].body,
-      imageUrls: namePostList[index].imageUrls,
-      username: namePostList[index].username,
-      userId: namePostList[index].userID,
-      postID: namePostList[index].postID,
-      postTime: namePostList[index].postTime,
+      title: posts[index].title,
+      body: posts[index].body,
+      imageUrls: posts[index].imageUrls,
+      username: posts[index].username,
+      userId: posts[index].userID,
+      postID: posts[index].postID,
+      postTime: posts[index].postTime,
     );
   }
 }
