@@ -1,6 +1,6 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
+
 import 'package:first_app/Screens/meditation-screen.dart';
 import 'package:first_app/Screens/MotivationalQuotes.dart';
 import 'package:first_app/Screens/ad-detail-screen.dart';
@@ -111,7 +111,6 @@ class MyAppState extends State<MyApp> {
           MeditationScreen.routeName: (context) => MeditationScreen(),
           StoryScreen.routeName: (context) => StoryScreen(),
           QuickQuotesScreen.routeName: (context) => QuickQuotesScreen(),
-          PickImageScreen.routeName: (context) => PickImageScreen(),
         },
       ),
     );

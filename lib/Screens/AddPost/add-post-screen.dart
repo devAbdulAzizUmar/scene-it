@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:first_app/Screens/AddPost/pick-image-screen.dart';
 import 'package:first_app/Util/api.dart';
 import 'package:first_app/Util/form-validation.dart';
 import 'package:flutter/material.dart';
@@ -115,14 +114,6 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   }
 
 ///////////////////////////////////////////////////
-
-  void navigateToImagePickerScreen({
-    BuildContext context,
-    Source imageSource,
-  }) {
-    Navigator.pushNamed(context, PickImageScreen.routeName,
-        arguments: imageSource);
-  }
 
   void _cancel() {
     if (_currentStep == 0) {
@@ -343,6 +334,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
     }).onError((error, stackTrace) {
       print("error");
     });
+
     if (galleryImage == null) {
       print("Fail");
     } else {
