@@ -79,7 +79,10 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     //Getting a reference to provider to listen to changes.
     final postsProvider = Provider.of<PostsProvider>(context, listen: true);
     posts = postsProvider.items;
+<<<<<<< Updated upstream
     print(posts.length);
+=======
+>>>>>>> Stashed changes
 
     if (firstLoad) {
       postsAfterSearch = posts;
@@ -159,6 +162,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
       controller: _scrollController,
       cacheExtent: 0,
       itemCount: postsAfterSearch.length + 2,
+
       itemBuilder: (context, index) {
         if (index == postsAfterSearch.length + 1) {
           return isLoadingMore
@@ -193,6 +197,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
           text.toLowerCase();
 
           setState(() {
+
             postsAfterSearch = posts.where((post) {
               var searchResult = post.username.toLowerCase();
               return searchResult.contains(text);
@@ -205,6 +210,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
   Widget _showPosts(index) {
     var namePostList;
+
     if (firstLoad == true) {
       namePostList = posts;
       firstLoad = false;
