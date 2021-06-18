@@ -331,7 +331,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
     PickedFile galleryImage =
         await picker.getImage(source: source).whenComplete(() {
       print("complete");
-    }).onError((error, stackTrace) {
+    }).onError((_, __) {
       print("error");
     });
 

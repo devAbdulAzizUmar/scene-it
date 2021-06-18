@@ -14,11 +14,11 @@ import 'package:first_app/Screens/quick-quotes.dart';
 
 import 'package:first_app/Screens/story-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
-import 'package:first_app/Util/api.dart';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
