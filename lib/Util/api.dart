@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-
-
 import 'package:first_app/Models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -125,7 +123,7 @@ class API {
     List<String> imageUrls,
   }) async {
     final response = await http.post(
-      Uri.http(baseURL, '/posts/addPost'),
+      Uri.https(baseURL, '/posts/addPost'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${CurrentUser.token}',

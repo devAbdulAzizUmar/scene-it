@@ -157,7 +157,6 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
   Widget buildList() {
     return ListView.builder(
       controller: _scrollController,
-      cacheExtent: 0,
       itemCount: postsAfterSearch.length + 2,
       itemBuilder: (context, index) {
         if (index == postsAfterSearch.length + 1) {

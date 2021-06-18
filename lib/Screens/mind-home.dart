@@ -19,7 +19,7 @@ class _MeditationhomeState extends State<MindHomePage> {
     final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meditation"),
+        title: Text("Mind"),
       ),
       body: ListView(
         children: [
