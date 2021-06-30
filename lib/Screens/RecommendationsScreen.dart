@@ -8,8 +8,7 @@ class RecommendationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final likedPosts =
-        Provider.of<PostsProvider>(context, listen: false).likedPosts;
+    final likedPosts = Provider.of<PostsProvider>(context, listen: false).likedPosts;
     final allPosts = Provider.of<PostsProvider>(context, listen: false).items;
     List<Post> recommendedPosts = [];
 
@@ -25,7 +24,6 @@ class RecommendationsScreen extends StatelessWidget {
         }
       }
     }
-    //TODO: Save the damn list!
 
     return Scaffold(
       appBar: AppBar(

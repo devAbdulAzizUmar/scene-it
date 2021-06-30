@@ -4,6 +4,7 @@ import 'package:first_app/Screens/CommentsScreen.dart';
 import 'package:first_app/Screens/ad-detail-screen.dart';
 import 'package:first_app/Screens/chat-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
+import 'package:first_app/Util/api.dart';
 import 'package:first_app/Widgets/expandable-text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -102,8 +103,7 @@ class _PostItemState extends State<PostItem> {
                       fontSize: 18,
                     )),
                   ),
-                  trailing: Container(
-                    width: 100,
+                  trailing: FittedBox(
                     child: Row(children: [
                       Icon(
                         Icons.attach_money,
@@ -127,7 +127,12 @@ class _PostItemState extends State<PostItem> {
                                 Icons.delete,
                                 color: Colors.red,
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                final response = await API.deletePost(postId: widget.postID);
+                                if (response.statusCode == 200) {
+                                  Provider.of<PostsProvider>(context, listen: false).deleteById(widget.postID);
+                                }
+                              },
                             ),
                           ],
                         ),

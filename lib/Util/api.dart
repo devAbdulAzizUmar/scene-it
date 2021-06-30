@@ -150,6 +150,23 @@ class API {
     );
   }
 
+  static Future<http.Response> deletePost({String postId}) {
+    return http.delete(
+      Uri.https(
+        baseURL,
+        "/posts/${CurrentUser.userName}/deletePost/$postId",
+        {
+          "username": CurrentUser.userName,
+          "postId": postId,
+        },
+      ),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${CurrentUser.token}',
+      },
+    );
+  }
+
   static Future<http.Response> uploadPost({
     @required String title,
     @required String description,

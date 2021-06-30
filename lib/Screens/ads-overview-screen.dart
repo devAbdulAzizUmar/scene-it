@@ -29,6 +29,8 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
   bool listHasDoneLoading = true;
   bool firstLoad = true;
   ScrollController _scrollController = ScrollController();
+  String searchQuery = "";
+  bool doneInitialLoad = false;
 
   @override
   void didChangeDependencies() {
@@ -37,6 +39,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
       Provider.of<PostsProvider>(context).getInitialPosts().then((response) {
         setState(() {
           isLoading = false;
+          doneInitialLoad = true;
         });
       });
 
@@ -73,17 +76,13 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     //Getting a reference to provider to listen to changes.
-    final postsProvider = Provider.of<PostsProvider>(context, listen: true);
-    posts = postsProvider.items;
+    final postsProvider = Provider.of<PostsProvider>(context);
+    posts = Provider.of<PostsProvider>(context).items;
 
-    if (firstLoad) {
+    if (firstLoad && doneInitialLoad) {
       postsAfterSearch = posts;
+      firstLoad = false;
     }
-
-    posts.forEach((element) {
-      print(element.location);
-      print(element.title);
-    });
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -185,11 +184,13 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
         decoration: InputDecoration(hintText: "Search by location"),
         onChanged: (text) {
           setState(() {
+            searchQuery = text;
             postsAfterSearch = posts.where((post) {
               var searchResult = post.location.toLowerCase();
               return searchResult.contains(text.toLowerCase());
             }).toList();
           });
+          print(searchQuery);
         },
       ),
     );
@@ -198,12 +199,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
   Widget _showPosts(index) {
     var namePostList;
 
-    if (firstLoad == true) {
-      namePostList = posts;
-      firstLoad = false;
-    } else {
-      namePostList = postsAfterSearch;
-    }
+    namePostList = searchQuery.isEmpty ? posts : postsAfterSearch;
 
     return PostItem(
         currentScreen: CurrentScreen.overviewScreen,

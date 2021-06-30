@@ -41,6 +41,11 @@ class PostsProvider with ChangeNotifier {
     return [..._likedPosts];
   }
 
+  void deleteById(postId) {
+    _posts.removeWhere((element) => element.postID == postId);
+    notifyListeners();
+  }
+
   void addLikedPost(String id) {
     final post = _posts.firstWhere((post) => id == post.postID);
     _likedPosts.add(post);
