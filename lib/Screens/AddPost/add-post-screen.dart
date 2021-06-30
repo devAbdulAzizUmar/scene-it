@@ -58,29 +58,24 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                 )
               : Column(
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Form(
-                        child: Stepper(
-                          physics: NeverScrollableScrollPhysics(),
-                          steps: steps(),
-                          type: StepperType.vertical,
-                          currentStep: _currentStep,
-                          onStepTapped: allowContinue() ? _setStep : null,
-                          onStepContinue: allowContinue() ? _continue : null,
-                          onStepCancel: _cancel,
-                        ),
+                    Form(
+                      child: Stepper(
+                        physics: NeverScrollableScrollPhysics(),
+                        steps: steps(),
+                        type: StepperType.vertical,
+                        currentStep: _currentStep,
+                        onStepTapped: allowContinue() ? _setStep : null,
+                        onStepContinue: allowContinue() ? _continue : null,
+                        onStepCancel: _cancel,
                       ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
                     image == null
-                        ? Expanded(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text("No image selected."),
-                            ),
+                        ? Container(
+                            alignment: Alignment.topCenter,
+                            child: Text("No image selected."),
                           )
                         : Expanded(
                             child: Stack(

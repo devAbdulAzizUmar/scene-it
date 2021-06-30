@@ -4,7 +4,7 @@ class FormValidation {
       return "Please enter title.";
     else if (title.length < 3)
       return "Title must be at least 3 characters.";
-    else if (title.length > 15)
+    else if (title.length > 25)
       return "Title must be less than 16 characters.";
     else
       return null;
