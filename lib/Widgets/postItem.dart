@@ -1,15 +1,19 @@
+import 'package:first_app/Models/post.dart';
+import 'package:first_app/Models/user.dart';
+import 'package:first_app/Screens/CommentsScreen.dart';
 import 'package:first_app/Screens/ad-detail-screen.dart';
 import 'package:first_app/Screens/chat-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
 import 'package:first_app/Widgets/expandable-text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum CurrentScreen {
   userScreen,
   overviewScreen,
 }
 
-class PostItem extends StatelessWidget {
+class PostItem extends StatefulWidget {
   final CurrentScreen currentScreen;
   final String postID;
   final String username;
@@ -18,6 +22,8 @@ class PostItem extends StatelessWidget {
   final String body;
   final List<dynamic> imageUrls;
   final String postTime;
+  final String price;
+  final String tags;
   PostItem({
     this.currentScreen,
     this.postID,
@@ -27,21 +33,29 @@ class PostItem extends StatelessWidget {
     this.body,
     this.imageUrls,
     this.postTime,
+    this.price = '',
+    this.tags,
   });
 
+  @override
+  _PostItemState createState() => _PostItemState();
+}
+
+class _PostItemState extends State<PostItem> {
+  bool isFav = false;
+
   void navigateToDetailScreen(BuildContext context, String title) {
-    Navigator.of(context)
-        .pushNamed(AdDetailsScreen.routeName, arguments: title);
+    Navigator.of(context).pushNamed(AdDetailsScreen.routeName, arguments: title);
   }
 
   @override
   Widget build(BuildContext context) {
     String avatarString = '';
-    if (username == "AbdulAziz") {
+    if (widget.username == "AbdulAziz") {
       avatarString = 'assets/aziz.jpeg';
-    } else if (username == 'Karishma') {
+    } else if (widget.username == 'Karishma') {
       avatarString = 'assets/karishma.jpeg';
-    } else if (username == 'Ali Mujtaba') {
+    } else if (widget.username == 'Ali Mujtaba') {
       avatarString = 'assets/ali.jpeg';
     } else {
       avatarString = 'assets/generic.jpg';
@@ -63,15 +77,13 @@ class PostItem extends StatelessWidget {
                 width: double.infinity,
                 child: ListTile(
                   onTap: () {
-                    navigateToDetailScreen(context, postID);
+                    navigateToDetailScreen(context, widget.postID);
                   },
                   leading: InkWell(
-                    onTap: currentScreen == CurrentScreen.userScreen
+                    onTap: widget.currentScreen == CurrentScreen.userScreen
                         ? () {}
                         : () {
-                            Navigator.of(context).pushNamed(
-                                UserScreen.routeName,
-                                arguments: username);
+                            Navigator.of(context).pushNamed(UserScreen.routeName, arguments: widget.username);
                           },
                     child: CircleAvatar(
                       radius: 25,
@@ -82,7 +94,7 @@ class PostItem extends StatelessWidget {
                     ),
                   ),
                   title: Text(
-                    title,
+                    widget.title,
                     style: (TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -96,19 +108,22 @@ class PostItem extends StatelessWidget {
                           Icons.attach_money,
                           color: Colors.blue,
                         ),
-                        Text("39.99",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20)),
+                        Text(
+                          widget.price == null ? "" : widget.price,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   subtitle: InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(UserScreen.routeName, arguments: username);
+                      Navigator.of(context).pushNamed(UserScreen.routeName, arguments: widget.username);
                     },
                     child: Text(
-                      username,
+                      widget.username,
                       style: (TextStyle(
                         fontSize: 16,
                       )),
@@ -128,7 +143,7 @@ class PostItem extends StatelessWidget {
                 ),
                 alignment: Alignment.topLeft,
                 child: Text(
-                  postTime,
+                  widget.postTime,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 13,
@@ -137,19 +152,19 @@ class PostItem extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  navigateToDetailScreen(context, postID);
+                  navigateToDetailScreen(context, widget.postID);
                 },
                 child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     alignment: Alignment.topLeft,
                     child: ExpandableText(
-                      body: body,
+                      body: widget.body,
                     )),
               ),
               Container(
-                height: imageUrls.isEmpty ? 0 : 10,
+                height: widget.imageUrls.isEmpty ? 0 : 10,
               ),
-              imageUrls.isEmpty
+              widget.imageUrls.isEmpty
                   ? Container()
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -160,61 +175,41 @@ class PostItem extends StatelessWidget {
                       ),
                     ),
               Container(
-                height: imageUrls.isEmpty ? 0 : 10,
+                height: widget.imageUrls.isEmpty ? 0 : 10,
               ),
-              imageUrls.isEmpty
+              widget.imageUrls.isEmpty
                   ? Container()
                   : InkWell(
                       onTap: () {
-                        navigateToDetailScreen(context, postID);
+                        navigateToDetailScreen(context, widget.postID);
                       },
                       child: Container(
-                        height: imageUrls.length > 3
+                        height: widget.imageUrls.length > 3
                             ? MediaQuery.of(context).size.width / 3
-                            : MediaQuery.of(context).size.width /
-                                    imageUrls.length -
-                                5,
+                            : MediaQuery.of(context).size.width / widget.imageUrls.length - 5,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: imageUrls.length > 3
+                            children: widget.imageUrls.length > 3
                                 ? [
                                     Image.network(
-                                      imageUrls[0],
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                                  3 -
-                                              5,
+                                      widget.imageUrls[0],
+                                      height: MediaQuery.of(context).size.width / 3 - 5,
                                       fit: BoxFit.cover,
-                                      width: MediaQuery.of(context).size.width /
-                                              3 -
-                                          5,
+                                      width: MediaQuery.of(context).size.width / 3 - 5,
                                     ),
                                     Image.network(
-                                      imageUrls[1],
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                                  3 -
-                                              5,
+                                      widget.imageUrls[1],
+                                      height: MediaQuery.of(context).size.width / 3 - 5,
                                       fit: BoxFit.cover,
-                                      width: MediaQuery.of(context).size.width /
-                                              3 -
-                                          5,
+                                      width: MediaQuery.of(context).size.width / 3 - 5,
                                     ),
                                     Stack(
                                       children: [
                                         Image.network(
-                                          imageUrls[2],
-                                          height: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3 -
-                                              5,
+                                          widget.imageUrls[2],
+                                          height: MediaQuery.of(context).size.width / 3 - 5,
                                           fit: BoxFit.cover,
-                                          width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3 -
-                                              5,
+                                          width: MediaQuery.of(context).size.width / 3 - 5,
                                         ),
                                         Container(
                                           child: Center(
@@ -224,7 +219,7 @@ class PostItem extends StatelessWidget {
                                                 color: Colors.black54,
                                               ),
                                               child: Text(
-                                                "+ ${imageUrls.length - 2} more...",
+                                                "+ ${widget.imageUrls.length - 2} more...",
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
@@ -235,30 +230,17 @@ class PostItem extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             color: Colors.black54,
                                           ),
-                                          height: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3 -
-                                              5,
-                                          width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  3 -
-                                              5,
+                                          height: MediaQuery.of(context).size.width / 3 - 5,
+                                          width: MediaQuery.of(context).size.width / 3 - 5,
                                         ),
                                       ],
                                     ),
                                   ]
-                                : imageUrls.map((image) {
+                                : widget.imageUrls.map((image) {
                                     return Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 5),
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                                  imageUrls.length -
-                                              5,
-                                      width: MediaQuery.of(context).size.width /
-                                          imageUrls.length,
+                                      padding: EdgeInsets.symmetric(horizontal: 5),
+                                      height: MediaQuery.of(context).size.width / widget.imageUrls.length - 5,
+                                      width: MediaQuery.of(context).size.width / widget.imageUrls.length,
                                       child: Image.network(
                                         image,
                                         fit: BoxFit.cover,
@@ -267,6 +249,22 @@ class PostItem extends StatelessWidget {
                                   }).toList()),
                       ),
                     ),
+              Container(
+                height: 10,
+              ),
+              if (widget.tags != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Tags: ${widget.tags.replaceAll(",", " ")}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      )),
+                ),
               Container(
                 height: 10,
               ),
@@ -285,18 +283,29 @@ class PostItem extends StatelessWidget {
                   children: [
                     makeBottomButton(
                         title: "Like",
-                        icon: Icon(Icons.thumb_up_alt_outlined),
-                        onPressed: () {}),
+                        icon: Icon(Icons.thumb_up_alt_outlined, color: isFav ? Colors.blue : Colors.grey),
+                        onPressed: () {
+                          setState(() {
+                            isFav = !isFav;
+                          });
+                          Provider.of<PostsProvider>(context, listen: false).addLikedPost(widget.postID);
+                        }),
                     makeBottomButton(
                       title: "Comment",
                       icon: Icon(Icons.comment_bank_outlined),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          CommentsScreen.routeName,
+                          arguments: widget.postID,
+                        );
+                      },
                     ),
                     makeBottomButton(
                       title: "Contact",
                       icon: Icon(Icons.call_outlined),
                       onPressed: () {
-                        navigateToChatScreen(username, userId, context);
+                        navigateToChatScreen(widget.username, widget.userId, context);
                       },
                     ),
                   ],
@@ -343,8 +352,7 @@ Widget makeBottomButton({String title, Icon icon, Function onPressed}) {
   );
 }
 
-navigateToChatScreen(
-    String recipientName, String recipientId, BuildContext context) {
+navigateToChatScreen(String recipientName, String recipientId, BuildContext context) {
   Navigator.of(context).pushNamed(ChatScreen.routeName, arguments: {
     "recipientId": recipientId,
     "recipientName": recipientName,

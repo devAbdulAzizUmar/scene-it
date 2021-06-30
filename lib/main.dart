@@ -1,5 +1,7 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:first_app/Screens/CommentsScreen.dart';
+import 'package:first_app/Screens/RecommendationsScreen.dart';
 
 import 'package:first_app/Screens/meditation-screen.dart';
 import 'package:first_app/Screens/MotivationalQuotes.dart';
@@ -14,7 +16,6 @@ import 'package:first_app/Screens/quick-quotes.dart';
 
 import 'package:first_app/Screens/story-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
-
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -102,8 +103,7 @@ class MyAppState extends State<MyApp> {
           AdDetailsScreen.routeName: (context) => AdDetailsScreen(),
           UserScreen.routeName: (context) => UserScreen(),
           AddPostScreen.routeName: (context) => AddPostScreen(),
-          AugmentedRealityScreen.routeName: (context) =>
-              AugmentedRealityScreen(),
+          AugmentedRealityScreen.routeName: (context) => AugmentedRealityScreen(),
           Motivationalquotes.routeName: (context) => Motivationalquotes(),
           MindHomePage.routeName: (context) => MindHomePage(),
           ChatScreen.routeName: (context) => ChatScreen(),
@@ -111,6 +111,8 @@ class MyAppState extends State<MyApp> {
           MeditationScreen.routeName: (context) => MeditationScreen(),
           StoryScreen.routeName: (context) => StoryScreen(),
           QuickQuotesScreen.routeName: (context) => QuickQuotesScreen(),
+          RecommendationsScreen.routeName: (context) => RecommendationsScreen(),
+          CommentsScreen.routeName: (context) => CommentsScreen(),
         },
       ),
     );

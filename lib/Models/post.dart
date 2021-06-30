@@ -14,7 +14,8 @@ class Post {
   final String body;
   final String postTime;
   final List<String> imageUrls;
-  final List<String> tags;
+  final String tags;
+  final String price;
 
   Post({
     this.postID,
@@ -25,12 +26,24 @@ class Post {
     this.postTime,
     this.imageUrls,
     this.tags,
+    this.price = '',
   });
 }
 
 class PostsProvider with ChangeNotifier {
   List<Post> _posts = [];
   List<Post> _userPosts = [];
+  List<Post> _likedPosts = [];
+
+  List<Post> get likedPosts {
+    return [..._likedPosts];
+  }
+
+  void addLikedPost(String id) {
+    final post = _posts.firstWhere((post) => id == post.postID);
+    _likedPosts.add(post);
+    notifyListeners();
+  }
 
   final storage = FlutterSecureStorage();
 
@@ -42,7 +55,8 @@ class PostsProvider with ChangeNotifier {
     return [..._userPosts];
   }
 
-  void addPost(userId, postID, body, username, imageUrls, title, postTime) {
+  void addPost(
+      userId, postID, body, username, imageUrls, title, postTime, price, tags) {
     _posts.add(
       Post(
         userID: userId,
@@ -52,12 +66,24 @@ class PostsProvider with ChangeNotifier {
         title: title,
         postID: postID,
         postTime: postTime,
+        price: price,
+        tags: tags,
       ),
     );
     notifyListeners();
   }
 
-  void addUserPost(userId, postID, body, username, imageUrls, title, postTime) {
+  void addUserPost(
+    userId,
+    postID,
+    body,
+    username,
+    imageUrls,
+    title,
+    postTime,
+    price,
+    tags,
+  ) {
     _userPosts.add(
       Post(
         userID: userId,
@@ -67,6 +93,8 @@ class PostsProvider with ChangeNotifier {
         title: title,
         postID: postID,
         postTime: postTime,
+        price: price,
+        tags: tags,
       ),
     );
     notifyListeners();
@@ -78,6 +106,7 @@ class PostsProvider with ChangeNotifier {
     final posts = json.decode(
       utf8.decode(response.bodyBytes),
     );
+    print(posts);
 
     List<Post> initialPosts = [];
     initialPosts.clear();
@@ -100,6 +129,8 @@ class PostsProvider with ChangeNotifier {
               .toList(),
           title: posts[i]["title"],
           postTime: timeAgo.format(timePassed),
+          price: posts[i]['country'],
+          tags: posts[i]['tagsString'],
         ),
       );
     }
@@ -124,6 +155,8 @@ class PostsProvider with ChangeNotifier {
         (posts[i]["images"] as List).map((image) => image as String).toList(),
         posts[i]["title"],
         timeAgo.format(timePassed),
+        posts[i]['country'],
+        posts[i]['tagsString'],
       );
     }
   }
@@ -145,6 +178,8 @@ class PostsProvider with ChangeNotifier {
         (posts[i]["images"] as List).map((image) => image as String).toList(),
         posts[i]["title"],
         timeAgo.format(timePassed),
+        posts[i]['country'],
+        posts[i]['tagsString'],
       );
       notifyListeners();
     }
@@ -166,6 +201,8 @@ class PostsProvider with ChangeNotifier {
             .toList(),
         title: posts[i]["title"],
         postTime: timeAgo.format(timePassed),
+        price: posts[i]['country'],
+        tags: posts[i]['tagsString'],
       ));
     }
     notifyListeners();

@@ -42,9 +42,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
       isInit = false;
       _scrollController.addListener(() {
-        if ((_scrollController.position.outOfRange ||
-                _scrollController.position.atEdge) &&
-            listHasDoneLoading) {
+        if ((_scrollController.position.outOfRange || _scrollController.position.atEdge) && listHasDoneLoading) {
           listHasDoneLoading = false;
           Future.delayed(Duration(seconds: 1)).whenComplete(() {
             listHasDoneLoading = true;
@@ -54,9 +52,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
             isLoadingMore = true;
           });
 
-          Provider.of<PostsProvider>(context, listen: false)
-              .getMorePosts(posts.last.postID)
-              .then((_) {
+          Provider.of<PostsProvider>(context, listen: false).getMorePosts(posts.last.postID).then((_) {
             setState(() {
               isLoadingMore = false;
             });
@@ -79,10 +75,6 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     //Getting a reference to provider to listen to changes.
     final postsProvider = Provider.of<PostsProvider>(context, listen: true);
     posts = postsProvider.items;
-<<<<<<< Updated upstream
-    print(posts.length);
-=======
->>>>>>> Stashed changes
 
     if (firstLoad) {
       postsAfterSearch = posts;
@@ -137,16 +129,13 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
                     isLoading = false;
                   });
                 });
-                Navigator.of(context)
-                    .pushReplacementNamed(LoginScreen.routeName);
+                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
               })
         ],
       ),
       body: isLoading
           ? Center(
-              child: Platform.isAndroid
-                  ? CircularProgressIndicator()
-                  : CupertinoActivityIndicator(),
+              child: Platform.isAndroid ? CircularProgressIndicator() : CupertinoActivityIndicator(),
             )
           : RefreshIndicator(
               onRefresh: () {
@@ -161,7 +150,6 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     return ListView.builder(
       controller: _scrollController,
       itemCount: postsAfterSearch.length + 2,
-
       itemBuilder: (context, index) {
         if (index == postsAfterSearch.length + 1) {
           return isLoadingMore
@@ -169,9 +157,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
                   height: 80,
                   color: Colors.white,
                   child: Center(
-                    child: Platform.isAndroid
-                        ? CircularProgressIndicator()
-                        : CupertinoActivityIndicator(),
+                    child: Platform.isAndroid ? CircularProgressIndicator() : CupertinoActivityIndicator(),
                   ),
                 )
               : Container(
@@ -193,13 +179,10 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
       child: TextField(
         decoration: InputDecoration(hintText: "Search by location"),
         onChanged: (text) {
-          text.toLowerCase();
-
           setState(() {
-
             postsAfterSearch = posts.where((post) {
               var searchResult = post.username.toLowerCase();
-              return searchResult.contains(text);
+              return searchResult.contains(text.toLowerCase());
             }).toList();
           });
         },
@@ -219,13 +202,15 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
     return PostItem(
       currentScreen: CurrentScreen.overviewScreen,
-      title: posts[index].title,
-      body: posts[index].body,
-      imageUrls: posts[index].imageUrls,
-      username: posts[index].username,
-      userId: posts[index].userID,
-      postID: posts[index].postID,
-      postTime: posts[index].postTime,
+      title: namePostList[index].title,
+      body: namePostList[index].body,
+      imageUrls: namePostList[index].imageUrls,
+      username: namePostList[index].username,
+      userId: namePostList[index].userID,
+      postID: namePostList[index].postID,
+      postTime: namePostList[index].postTime,
+      price: namePostList[index].price,
+      tags: namePostList[index].tags,
     );
   }
 }

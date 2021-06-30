@@ -70,7 +70,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: StreamBuilder(
                   stream: _socket.stream,
                   builder: (context, snapshot) {
-                    print("Building...");
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
                           child: CircularProgressIndicator.adaptive());

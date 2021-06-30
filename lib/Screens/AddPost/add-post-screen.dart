@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:first_app/Util/api.dart';
 import 'package:first_app/Util/form-validation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 enum Source {
@@ -26,6 +27,8 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   bool isLoading = false;
   String loadingText = '';
   String imageUrl = '';
+  String price = '';
+  String tags = '';
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +168,8 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
           description: description,
           location: location,
           imageUrls: [imageUrl],
+          price: price,
+          tags: tags,
         );
         setState(
           () {
@@ -225,6 +230,16 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
         state: _currentStep == 1 ? StepState.editing : StepState.complete,
       ),
       Step(
+        title: Text("Tags"),
+        content: TextFormField(
+          onChanged: (value) {
+            tags = value;
+          },
+        ),
+        isActive: _currentStep == 2,
+        state: _currentStep == 2 ? StepState.editing : StepState.complete,
+      ),
+      Step(
         title: Text("Description"),
         content: TextFormField(
           autovalidateMode: AutovalidateMode.always,
@@ -235,8 +250,26 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
             });
           },
         ),
-        isActive: _currentStep == 2,
-        state: _currentStep == 2
+        isActive: _currentStep == 3,
+        state: _currentStep == 3
+            ? StepState.editing
+            : validatePostDescription(description) == null
+                ? StepState.complete
+                : StepState.indexed,
+      ),
+      Step(
+        title: Text("Price"),
+        content: TextFormField(
+          autovalidateMode: AutovalidateMode.always,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          onChanged: (value) {
+            setState(() {
+              price = value;
+            });
+          },
+        ),
+        isActive: _currentStep == 4,
+        state: _currentStep == 4
             ? StepState.editing
             : validatePostDescription(description) == null
                 ? StepState.complete
@@ -319,7 +352,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   bool allowContinue() {
     if (_currentStep == 0) {
       return validatePostTitle(title) != null ? false : true;
-    } else if (_currentStep == 2) {
+    } else if (_currentStep == 3) {
       return validatePostDescription(description) != null ? false : true;
     } else
       return true;

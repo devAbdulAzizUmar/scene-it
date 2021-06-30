@@ -59,8 +59,7 @@ class API {
     );
   }
 
-  static Future<http.Response> getMoreUserPosts(
-      String lastId, String username) async {
+  static Future<http.Response> getMoreUserPosts(String lastId, String username) async {
     //get the next ten posts from the API for lazyloading
 
     final storage = FlutterSecureStorage();
@@ -116,11 +115,17 @@ class API {
     );
   }
 
+  static Future<http.Response> getComments({String postId}) {
+    return http.get(Uri.https(baseURL, "/comments/getComments", {"postId": postId}));
+  }
+
   static Future<http.Response> uploadPost({
     @required String title,
     @required String description,
     String location,
     List<String> imageUrls,
+    String price,
+    String tags,
   }) async {
     final response = await http.post(
       Uri.https(baseURL, '/posts/addPost'),
@@ -134,8 +139,10 @@ class API {
           "username": CurrentUser.userName,
           "title": title,
           "location": location,
+          "country": price,
           "body": description,
-          "tags": ["vehicles", "bmw", "530D", "SE", "2014"],
+          "tags": [...tags.split(",")],
+          "tagsString": tags,
           "isVehicle": false,
           "images": imageUrls,
           "vehicleInfo": {

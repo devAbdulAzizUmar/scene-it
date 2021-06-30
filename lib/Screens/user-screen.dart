@@ -129,6 +129,7 @@ class _UserScreenState extends State<UserScreen> {
                   postTime: posts[index].postTime,
                   postID: posts[index].postID,
                   username: posts[index].username,
+                  tags: posts[index].tags,
                 );
               },
               childCount: posts.length + 1,
