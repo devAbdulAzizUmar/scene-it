@@ -43,7 +43,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
       isInit = false;
       _scrollController.addListener(() {
         if ((_scrollController.position.outOfRange ||
-                _scrollController.position.atEdge) &&
+            _scrollController.position.atEdge) &&
             listHasDoneLoading) {
           listHasDoneLoading = false;
           Future.delayed(Duration(seconds: 1)).whenComplete(() {
@@ -79,10 +79,6 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     //Getting a reference to provider to listen to changes.
     final postsProvider = Provider.of<PostsProvider>(context, listen: true);
     posts = postsProvider.items;
-<<<<<<< Updated upstream
-    print(posts.length);
-=======
->>>>>>> Stashed changes
 
     if (firstLoad) {
       postsAfterSearch = posts;
@@ -144,16 +140,16 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
       ),
       body: isLoading
           ? Center(
-              child: Platform.isAndroid
-                  ? CircularProgressIndicator()
-                  : CupertinoActivityIndicator(),
-            )
+        child: Platform.isAndroid
+            ? CircularProgressIndicator()
+            : CupertinoActivityIndicator(),
+      )
           : RefreshIndicator(
-              onRefresh: () {
-                return postsProvider.getInitialPosts();
-              },
-              child: buildList(),
-            ),
+        onRefresh: () {
+          return postsProvider.getInitialPosts();
+        },
+        child: buildList(),
+      ),
     );
   }
 
@@ -166,20 +162,20 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
         if (index == postsAfterSearch.length + 1) {
           return isLoadingMore
               ? Container(
-                  height: 80,
-                  color: Colors.white,
-                  child: Center(
-                    child: Platform.isAndroid
-                        ? CircularProgressIndicator()
-                        : CupertinoActivityIndicator(),
-                  ),
-                )
+            height: 80,
+            color: Colors.white,
+            child: Center(
+              child: Platform.isAndroid
+                  ? CircularProgressIndicator()
+                  : CupertinoActivityIndicator(),
+            ),
+          )
               : Container(
-                  height: 80,
-                  child: Center(
-                    child: Text("No more posts."),
-                  ),
-                );
+            height: 80,
+            child: Center(
+              child: Text("No more posts."),
+            ),
+          );
         }
 
         return index == 0 ? _searchBar() : _showPosts(index - 1);
@@ -219,13 +215,13 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
     return PostItem(
       currentScreen: CurrentScreen.overviewScreen,
-      title: posts[index].title,
-      body: posts[index].body,
-      imageUrls: posts[index].imageUrls,
-      username: posts[index].username,
-      userId: posts[index].userID,
-      postID: posts[index].postID,
-      postTime: posts[index].postTime,
+      title: namePostList[index].title,
+      body: namePostList[index].body,
+      imageUrls: namePostList[index].imageUrls,
+      username: namePostList[index].username,
+      userId: namePostList[index].userID,
+      postID: namePostList[index].postID,
+      postTime: namePostList[index].postTime,
     );
   }
 }
