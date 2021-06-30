@@ -24,6 +24,7 @@ class PostItem extends StatefulWidget {
   final String postTime;
   final String price;
   final String tags;
+  final String location;
   PostItem({
     this.currentScreen,
     this.postID,
@@ -35,6 +36,7 @@ class PostItem extends StatefulWidget {
     this.postTime,
     this.price = '',
     this.tags,
+    this.location,
   });
 
   @override

@@ -16,6 +16,7 @@ class Post {
   final List<String> imageUrls;
   final String tags;
   final String price;
+  final String location;
 
   Post({
     this.postID,
@@ -27,6 +28,7 @@ class Post {
     this.imageUrls,
     this.tags,
     this.price = '',
+    this.location,
   });
 }
 
@@ -55,20 +57,19 @@ class PostsProvider with ChangeNotifier {
     return [..._userPosts];
   }
 
-  void addPost(
-      userId, postID, body, username, imageUrls, title, postTime, price, tags) {
+  void addPost(userId, postID, body, username, imageUrls, title, postTime, price, tags, location) {
     _posts.add(
       Post(
-        userID: userId,
-        body: body,
-        username: username,
-        imageUrls: imageUrls,
-        title: title,
-        postID: postID,
-        postTime: postTime,
-        price: price,
-        tags: tags,
-      ),
+          userID: userId,
+          body: body,
+          username: username,
+          imageUrls: imageUrls,
+          title: title,
+          postID: postID,
+          postTime: postTime,
+          price: price,
+          tags: tags,
+          location: location),
     );
     notifyListeners();
   }
@@ -83,6 +84,7 @@ class PostsProvider with ChangeNotifier {
     postTime,
     price,
     tags,
+    location,
   ) {
     _userPosts.add(
       Post(
@@ -95,6 +97,7 @@ class PostsProvider with ChangeNotifier {
         postTime: postTime,
         price: price,
         tags: tags,
+        location: location,
       ),
     );
     notifyListeners();
@@ -114,8 +117,7 @@ class PostsProvider with ChangeNotifier {
     notifyListeners();
 
     for (int i = 0; i < posts.length; i++) {
-      var timePassed =
-          DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
+      var timePassed = DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
 
       print(timeAgo.format(timePassed));
       initialPosts.add(
@@ -124,13 +126,12 @@ class PostsProvider with ChangeNotifier {
           postID: posts[i]["id"],
           body: posts[i]["body"],
           username: posts[i]["username"],
-          imageUrls: (posts[i]["images"] as List)
-              .map((image) => image as String)
-              .toList(),
+          imageUrls: (posts[i]["images"] as List).map((image) => image as String).toList(),
           title: posts[i]["title"],
           postTime: timeAgo.format(timePassed),
           price: posts[i]['country'],
           tags: posts[i]['tagsString'],
+          location: posts[i]['location'],
         ),
       );
     }
@@ -145,8 +146,7 @@ class PostsProvider with ChangeNotifier {
     final posts = json.decode(utf8.decode(response.bodyBytes));
 
     for (int i = 0; i < posts.length; i++) {
-      var timePassed =
-          DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
+      var timePassed = DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
       addPost(
         posts[i]["userId"],
         posts[i]["id"],
@@ -157,6 +157,7 @@ class PostsProvider with ChangeNotifier {
         timeAgo.format(timePassed),
         posts[i]['country'],
         posts[i]['tagsString'],
+        posts[i]['location'],
       );
     }
   }
@@ -168,8 +169,7 @@ class PostsProvider with ChangeNotifier {
     final posts = json.decode(utf8.decode(response.bodyBytes));
 
     for (int i = 0; i < posts.length; i++) {
-      var timePassed =
-          DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
+      var timePassed = DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
       addUserPost(
         posts[i]["userId"],
         posts[i]["id"],
@@ -180,6 +180,7 @@ class PostsProvider with ChangeNotifier {
         timeAgo.format(timePassed),
         posts[i]['country'],
         posts[i]['tagsString'],
+        posts[i]['location'],
       );
       notifyListeners();
     }
@@ -190,15 +191,12 @@ class PostsProvider with ChangeNotifier {
     final response = await API.getUserPosts(username: username);
     final posts = json.decode(utf8.decode(response.bodyBytes));
     for (int i = 0; i < posts.length; i++) {
-      var timePassed =
-          DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
+      var timePassed = DateTime.fromMillisecondsSinceEpoch(posts[i]["postTime"] * 1000);
       _userPosts.add(Post(
         postID: posts[i]["id"],
         body: posts[i]["body"],
         username: posts[i]["username"],
-        imageUrls: (posts[i]["images"] as List)
-            .map((image) => image as String)
-            .toList(),
+        imageUrls: (posts[i]["images"] as List).map((image) => image as String).toList(),
         title: posts[i]["title"],
         postTime: timeAgo.format(timePassed),
         price: posts[i]['country'],

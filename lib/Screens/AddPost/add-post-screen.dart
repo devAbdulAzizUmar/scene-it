@@ -88,8 +88,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                                     top: 10,
                                   ),
                                   clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10)),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                                   child: Image.file(image),
                                 ),
                                 Positioned(
@@ -230,7 +229,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
         state: _currentStep == 1 ? StepState.editing : StepState.complete,
       ),
       Step(
-        title: Text("Tags"),
+        title: Text("Tags (separate by comas)"),
         content: TextFormField(
           onChanged: (value) {
             tags = value;
@@ -361,8 +360,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
   getImage(ImageSource source) async {
     ImagePicker picker = ImagePicker();
 
-    PickedFile galleryImage =
-        await picker.getImage(source: source).whenComplete(() {
+    PickedFile galleryImage = await picker.getImage(source: source).whenComplete(() {
       print("complete");
     }).onError((_, __) {
       print("error");

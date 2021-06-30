@@ -122,9 +122,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
                   child: ListView(
                     children: comments.map((comment) {
                       return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey.shade100,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         padding: EdgeInsets.all(10),
                         margin: EdgeInsets.only(bottom: 10),
-                        color: Colors.blueGrey.shade100,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
