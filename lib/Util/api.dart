@@ -23,6 +23,27 @@ class API {
     );
   }
 
+  static Future<http.Response> addComment({String userId, String postId, String comment}) async {
+    return http.post(
+      Uri.https(baseURL, "/comments/addComment"),
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer ${CurrentUser.token}",
+      },
+      body: jsonEncode(
+        {
+          "postId": postId,
+          "isReply": false,
+          "replyToCommentId": "",
+          "username": CurrentUser.userName,
+          "userId": CurrentUser.id,
+          "fullName": CurrentUser.firstName,
+          "body": comment,
+        },
+      ),
+    );
+  }
+
   static Future<http.Response> getPosts() async {
     //This function is executed everytime a request for new posts is sent
     //and the result is then sent back to the UI for rendering
@@ -116,7 +137,17 @@ class API {
   }
 
   static Future<http.Response> getComments({String postId}) {
-    return http.get(Uri.https(baseURL, "/comments/getComments", {"postId": postId}));
+    return http.get(
+      Uri.https(
+        baseURL,
+        "/comments/getComments",
+        {"postId": postId},
+      ),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${CurrentUser.token}',
+      },
+    );
   }
 
   static Future<http.Response> uploadPost({
