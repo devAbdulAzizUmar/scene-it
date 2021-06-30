@@ -118,12 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
   // BUILD METHOD
   // ===========================================================================
   //
-  @override
-  void initState() {
-    _usernameController.text = "therealaziz";
-    _passwordController.text = "randompassword3";
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,148 +138,83 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? Center(child: CircularProgressIndicator())
                 : Form(
                     key: _formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      TextFormField(
+                        controller: _usernameController,
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Please enter a username.";
+                          } else if (value.length < 7) {
+                            return "Username must be greater than 6";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Username",
+                          labelText: "Username",
+                          icon: Icon(Icons.email),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Please enter a password.";
+                          } else
+                            return null;
+                        },
+                        obscureText: _isPassObscured ? true : false,
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          hintText: "Password",
+                          labelText: "Password",
+                          icon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(_isPassObscured ? Icons.remove_red_eye : Icons.remove_red_eye_outlined),
+                            onPressed: () {
+                              _toggleObscured();
+                            },
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextFormField(
-                            controller: _usernameController,
-                            textInputAction: TextInputAction.next,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Please enter a username.";
-                              } else if (value.length < 7) {
-                                return "Username must be greater than 6";
-                              } else {
-                                return null;
-                              }
-                            },
-                            decoration: InputDecoration(
-                              hintText: "Username",
-                              labelText: "Username",
-                              icon: Icon(Icons.email),
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-                          TextFormField(
-                            textInputAction: TextInputAction.next,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Please enter a password.";
-                              } else
-                                return null;
-                            },
-                            obscureText: _isPassObscured ? true : false,
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              labelText: "Password",
-                              icon: Icon(Icons.lock),
-                              suffixIcon: IconButton(
-                                icon: Icon(_isPassObscured
-                                    ? Icons.remove_red_eye
-                                    : Icons.remove_red_eye_outlined),
-                                onPressed: () {
-                                  _toggleObscured();
-                                },
-                              ),
-                            ),
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _remember = !_remember;
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Checkbox(
-                                        value: _remember,
-                                        onChanged: (_) {
-                                          setState(() {
-                                            _remember = !_remember;
-                                          });
-                                        }),
-                                    Text(
-                                      "Remember me",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.cyan[900]),
-                                    ),
-                                  ],
-                                ),
+                              Text("Don't have an account?"),
+                              SizedBox(
+                                width: 5,
                               ),
                               InkWell(
                                 child: Text(
-                                  "Forgot password?",
+                                  "Signup",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.cyan[900]),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                  ),
                                 ),
-                                onTap: () {},
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text("Don't have an account?"),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  InkWell(
-                                    child: Text(
-                                      "Signup",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        SignupScreen.routeName,
-                                      );
-                                    },
-                                  ),
-                                ],
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    SignupScreen.routeName,
+                                  );
+                                },
                               ),
-                              mediaQuery.size.width >= 380
-                                  ? RaisedButton(
-                                      color: Colors.blue,
-                                      onPressed: () {
-                                        _login(_usernameController.text.trim(),
-                                            _passwordController.text.trim());
-                                      },
-                                      child: RichText(
-                                        text: TextSpan(
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            letterSpacing: 0.8,
-                                          ),
-                                          text: "Login",
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
                             ],
                           ),
-                          mediaQuery.size.width <= 380
+                          mediaQuery.size.width >= 380
                               ? RaisedButton(
                                   color: Colors.blue,
                                   onPressed: () {
-                                    _login(_usernameController.text.trim(),
-                                        _passwordController.text.trim());
+                                    _login(_usernameController.text.trim(), _passwordController.text.trim());
                                   },
                                   child: RichText(
                                     text: TextSpan(
                                       style: TextStyle(
-                                        color: Theme.of(context).cardColor,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         letterSpacing: 0.8,
@@ -295,16 +224,34 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 )
                               : Container(),
-                        ]),
+                        ],
+                      ),
+                      mediaQuery.size.width <= 380
+                          ? RaisedButton(
+                              color: Colors.blue,
+                              onPressed: () {
+                                _login(_usernameController.text.trim(), _passwordController.text.trim());
+                              },
+                              child: RichText(
+                                text: TextSpan(
+                                  style: TextStyle(
+                                    color: Theme.of(context).cardColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    letterSpacing: 0.8,
+                                  ),
+                                  text: "Login",
+                                ),
+                              ),
+                            )
+                          : Container(),
+                    ]),
                   ),
           ),
         )),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.blue[600].withOpacity(0.7),
-              Colors.blue[900].withOpacity(0.6)
-            ],
+            colors: [Colors.blue[600].withOpacity(0.7), Colors.blue[900].withOpacity(0.6)],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
           ),

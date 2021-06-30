@@ -12,7 +12,7 @@
     <application
     
         android:name="io.flutter.app.FlutterApplication"
-        android:label="first_app"
+        android:label="Scene It"
         android:icon="@mipmap/ic_launcher">
         android:requestLegacyExternalStorage="true"
         <activity
