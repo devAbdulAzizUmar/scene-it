@@ -186,7 +186,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
         onChanged: (text) {
           setState(() {
             postsAfterSearch = posts.where((post) {
-              var searchResult = post.username.toLowerCase();
+              var searchResult = post.location.toLowerCase();
               return searchResult.contains(text.toLowerCase());
             }).toList();
           });
