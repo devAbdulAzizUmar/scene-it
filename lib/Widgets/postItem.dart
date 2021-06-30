@@ -104,21 +104,34 @@ class _PostItemState extends State<PostItem> {
                   ),
                   trailing: Container(
                     width: 100,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.attach_money,
-                          color: Colors.blue,
+                    child: Row(children: [
+                      Icon(
+                        Icons.attach_money,
+                        color: Colors.blue,
+                      ),
+                      Text(
+                        widget.price == null ? "" : widget.price,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
-                        Text(
-                          widget.price == null ? "" : widget.price,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+                      ),
+                      if (widget.userId == CurrentUser.id)
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 5,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                    ]),
                   ),
                   subtitle: InkWell(
                     onTap: () {
