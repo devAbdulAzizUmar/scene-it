@@ -131,14 +131,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Card(
           elevation: 8,
           child: Container(
-            height: 300,
             width: double.infinity,
             padding: EdgeInsets.all(20),
             child: _isLoading
                 ? Center(child: CircularProgressIndicator())
                 : Form(
                     key: _formKey,
-                    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    child:
+                        Column(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.center, children: [
                       TextFormField(
                         controller: _usernameController,
                         textInputAction: TextInputAction.next,
@@ -180,8 +180,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
                             children: [
@@ -203,6 +206,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SignupScreen.routeName,
                                   );
                                 },
+                              ),
+                              SizedBox(
+                                width: 10,
                               ),
                             ],
                           ),

@@ -28,9 +28,7 @@ class AppDrawer extends StatelessWidget {
                   child: ListTile(
                     onTap: () {},
                     title: Text(
-                      CurrentUser.firstName.isEmpty
-                          ? ""
-                          : CurrentUser.firstName,
+                      CurrentUser.firstName.isEmpty ? "" : "${CurrentUser.firstName} ${CurrentUser.lastName}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
@@ -53,8 +51,7 @@ class AppDrawer extends StatelessWidget {
               ),
               AdaptiveListItem(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed(AdsOverviewScreen.routeName);
+                  Navigator.of(context).pushReplacementNamed(AdsOverviewScreen.routeName);
                 },
                 leading: Icon(
                   Icons.store,
@@ -87,8 +84,7 @@ class AppDrawer extends StatelessWidget {
               ),
               AdaptiveListItem(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(RecommendationsScreen.routeName);
+                  Navigator.of(context).pushNamed(RecommendationsScreen.routeName);
                 },
                 leading: Icon(
                   CupertinoIcons.heart,
@@ -108,8 +104,7 @@ class AppDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 30),
             child: ListTile(
               onTap: () async {
-                Navigator.of(context)
-                    .pushReplacementNamed(LoginScreen.routeName);
+                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
               },
               leading: Icon(
                 Icons.logout,

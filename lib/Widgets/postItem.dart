@@ -267,6 +267,19 @@ class _PostItemState extends State<PostItem> {
                         ),
                       )),
                 ),
+              if (widget.location != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Location: ${widget.location}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      )),
+                ),
               Container(
                 height: 10,
               ),

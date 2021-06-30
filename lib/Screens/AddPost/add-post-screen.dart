@@ -72,6 +72,9 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     image == null
                         ? Expanded(
                             child: Container(
@@ -107,7 +110,10 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
                                     ))
                               ],
                             ),
-                          )
+                          ),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
         ),
@@ -229,7 +235,7 @@ class _AddPostScreenState extends State<AddPostScreen> with FormValidation {
         state: _currentStep == 1 ? StepState.editing : StepState.complete,
       ),
       Step(
-        title: Text("Tags (separate by comas)"),
+        title: Text("Tags (separate by commas)"),
         content: TextFormField(
           onChanged: (value) {
             tags = value;

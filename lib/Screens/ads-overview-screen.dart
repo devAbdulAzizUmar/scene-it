@@ -42,7 +42,7 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
 
       isInit = false;
       _scrollController.addListener(() {
-        if ((_scrollController.position.outOfRange || _scrollController.position.atEdge) && listHasDoneLoading) {
+        if ((_scrollController.position.maxScrollExtent <= _scrollController.position.pixels) && listHasDoneLoading) {
           listHasDoneLoading = false;
           Future.delayed(Duration(seconds: 1)).whenComplete(() {
             listHasDoneLoading = true;
@@ -79,6 +79,11 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     if (firstLoad) {
       postsAfterSearch = posts;
     }
+
+    posts.forEach((element) {
+      print(element.location);
+      print(element.title);
+    });
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -201,16 +206,16 @@ class _AdsOverviewScreenState extends State<AdsOverviewScreen> {
     }
 
     return PostItem(
-      currentScreen: CurrentScreen.overviewScreen,
-      title: namePostList[index].title,
-      body: namePostList[index].body,
-      imageUrls: namePostList[index].imageUrls,
-      username: namePostList[index].username,
-      userId: namePostList[index].userID,
-      postID: namePostList[index].postID,
-      postTime: namePostList[index].postTime,
-      price: namePostList[index].price,
-      tags: namePostList[index].tags,
-    );
+        currentScreen: CurrentScreen.overviewScreen,
+        title: namePostList[index].title,
+        body: namePostList[index].body,
+        imageUrls: namePostList[index].imageUrls,
+        username: namePostList[index].username,
+        userId: namePostList[index].userID,
+        postID: namePostList[index].postID,
+        postTime: namePostList[index].postTime,
+        price: namePostList[index].price,
+        tags: namePostList[index].tags,
+        location: namePostList[index].location);
   }
 }
