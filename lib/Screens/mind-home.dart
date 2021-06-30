@@ -34,8 +34,7 @@ class _MeditationhomeState extends State<MindHomePage> {
             height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              gradient:
-                  LinearGradient(colors: [Colors.blue[900], Colors.blue[300]]),
+              gradient: LinearGradient(colors: [Colors.blue[900], Colors.blue[300]]),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.6),
@@ -59,15 +58,12 @@ class _MeditationhomeState extends State<MindHomePage> {
 //////*Second Heading*///////
                     Text(
                       username == null ? "Username" : username,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/aziz.jpeg'),
+                  backgroundImage: AssetImage('assets/generic.jpg'),
                   maxRadius: 45,
                   backgroundColor: Colors.grey,
                 ),
@@ -94,8 +90,7 @@ class _MeditationhomeState extends State<MindHomePage> {
                     width: mediaQuery.size.width / 2 - 10,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                          colors: [Colors.grey[700], Colors.blue[300]]),
+                      gradient: LinearGradient(colors: [Colors.grey[700], Colors.blue[300]]),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.6),
@@ -118,10 +113,7 @@ class _MeditationhomeState extends State<MindHomePage> {
                         ),
                         Text("Meditation",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 27,
-                                fontWeight: FontWeight.bold)),
+                            style: TextStyle(color: Colors.white, fontSize: 27, fontWeight: FontWeight.bold)),
                         SizedBox(
                           height: 10,
                         ),
@@ -148,8 +140,7 @@ class _MeditationhomeState extends State<MindHomePage> {
                     width: mediaQuery.size.width / 2 - 10,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        gradient: LinearGradient(
-                            colors: [Colors.blue[300], Colors.grey[700]]),
+                        gradient: LinearGradient(colors: [Colors.blue[300], Colors.grey[700]]),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.6),
@@ -171,10 +162,7 @@ class _MeditationhomeState extends State<MindHomePage> {
                         ),
                         Text("Motivation",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 27,
-                                fontWeight: FontWeight.bold)),
+                            style: TextStyle(color: Colors.white, fontSize: 27, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),

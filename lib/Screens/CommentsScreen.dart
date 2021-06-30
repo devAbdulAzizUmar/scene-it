@@ -39,6 +39,22 @@ class _CommentsScreenState extends State<CommentsScreen> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("Comments"),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  final response = await API.getComments(postId: postId);
+
+                  setState(() {
+                    comments = jsonDecode(response.body);
+                    isLoading = false;
+                  });
+                },
+              )
+            ],
           ),
           body: isLoading
               ? Center(
