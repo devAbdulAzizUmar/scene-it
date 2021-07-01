@@ -23,21 +23,21 @@ class _MeditationScreenState extends State<MeditationScreen> {
 
   final List<Audio> audios = [
     Audio(
-      title: "Quiet Time",
+      title: "Powerful Guided",
       image: 'assets/qt.jpg',
-      audioAsset: '1.mp3',
+      audioAsset: 'powerfulguided.mp3',
       isPlaying: false,
     ),
     Audio(
-      title: "Deep Mediatation",
-      image: 'assets/dm.png',
-      audioAsset: '2.mp3',
+      title: "Morning Guided",
+      image: 'assets/ti.png',
+      audioAsset: 'morningguided.mp3',
       isPlaying: false,
     ),
     Audio(
-      title: "Time Alone",
-      image: 'assets/ti.jpg',
-      audioAsset: '3.mp3',
+      title: "Night Guided",
+      image: 'assets/dm.jpg',
+      audioAsset: 'nightguided.mp3',
       isPlaying: false,
     ),
     Audio(
@@ -82,6 +82,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
       audioAsset: '10.mp3',
       isPlaying: false,
     ),
+    
   ];
 
   @override
