@@ -24,6 +24,13 @@ class RecommendationsScreen extends StatelessWidget {
         }
       }
     }
+    for (var i = 0; i < recommendedPosts.length; i++) {
+      for (var j = i + 1; j < recommendedPosts.length; j++) {
+        if (recommendedPosts[i].postID == recommendedPosts[j].postID) {
+          recommendedPosts.removeAt(i);
+        }
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(

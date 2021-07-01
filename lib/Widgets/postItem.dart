@@ -2,6 +2,7 @@ import 'package:first_app/Models/post.dart';
 import 'package:first_app/Models/user.dart';
 import 'package:first_app/Screens/CommentsScreen.dart';
 import 'package:first_app/Screens/ad-detail-screen.dart';
+import 'package:first_app/Screens/ads-overview-screen.dart';
 import 'package:first_app/Screens/chat-screen.dart';
 import 'package:first_app/Screens/user-screen.dart';
 import 'package:first_app/Util/api.dart';
@@ -131,6 +132,7 @@ class _PostItemState extends State<PostItem> {
                                 final response = await API.deletePost(postId: widget.postID);
                                 if (response.statusCode == 200) {
                                   Provider.of<PostsProvider>(context, listen: false).deleteById(widget.postID);
+                                  Navigator.pushReplacementNamed(context, AdsOverviewScreen.routeName);
                                 }
                               },
                             ),
