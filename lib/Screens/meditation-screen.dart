@@ -25,19 +25,19 @@ class _MeditationScreenState extends State<MeditationScreen> {
     Audio(
       title: "Powerful Guided",
       image: 'assets/qt.jpg',
-      audioAsset: 'powerfulguided.mp3',
+      audioAsset: '1.mp3',
       isPlaying: false,
     ),
     Audio(
       title: "Morning Guided",
-      image: 'assets/ti.png',
-      audioAsset: 'morningguided.mp3',
+      image: 'assets/ti.jpg',
+      audioAsset: '2.mp3',
       isPlaying: false,
     ),
     Audio(
       title: "Night Guided",
-      image: 'assets/dm.jpg',
-      audioAsset: 'nightguided.mp3',
+      image: 'assets/dm.png',
+      audioAsset: '3.mp3',
       isPlaying: false,
     ),
     Audio(
@@ -82,7 +82,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
       audioAsset: '10.mp3',
       isPlaying: false,
     ),
-    
   ];
 
   @override
@@ -139,8 +138,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   width: 400,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                          colors: [Colors.blue[700], Colors.blue[300]]),
+                      gradient: LinearGradient(colors: [Colors.blue[700], Colors.blue[300]]),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.6),
@@ -184,9 +182,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                     itemBuilder: (context, index) {
                       return AudioContainer(
                         audio: audios[index],
-                        color: index.isEven
-                            ? Colors.blueGrey[400]
-                            : Colors.blueGrey[200],
+                        color: index.isEven ? Colors.blueGrey[400] : Colors.blueGrey[200],
                         startPlaying: () {
                           startPlaying(index);
                         },

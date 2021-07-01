@@ -44,12 +44,10 @@ class AdDetailsScreen extends StatelessWidget {
               post: post,
               avatarString: avatarString,
             );
-          } else if (post.imageUrls.isEmpty
-              ? index == 1
-              : index == (post.imageUrls.length + 2) - 1) {
+          } else if (post.imageUrls.isEmpty ? index == 1 : index == (post.imageUrls.length + 2) - 1) {
             return Center(
               heightFactor: 5,
-              child: Text("Comment Section"),
+              child: Container(),
             );
           } else {
             return ImageContainer(
@@ -139,17 +137,14 @@ class TopArea extends StatelessWidget {
                       Icons.attach_money,
                       color: Colors.blue,
                     ),
-                    Text("39.99",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    Text("39.99", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   ],
                 ),
               ),
               onTap: () {},
               leading: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed(UserScreen.routeName,
-                      arguments: post.username);
+                  Navigator.of(context).pushNamed(UserScreen.routeName, arguments: post.username);
                 },
                 child: CircleAvatar(
                   radius: 25,
@@ -264,9 +259,7 @@ class _ImageGalleryState extends State<ImageGallery> {
       floatingActionButton: InkWell(
         onTap: () {
           Navigator.of(context).pushNamed(
-              Platform.isAndroid
-                  ? AugmentedRealityScreen.routeName
-                  : IOSAugmentedReality.routeName,
+              Platform.isAndroid ? AugmentedRealityScreen.routeName : IOSAugmentedReality.routeName,
               arguments: widget.imageUrls[arCurrentIndex]);
         },
         child: Icon(

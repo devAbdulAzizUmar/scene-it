@@ -24,6 +24,7 @@ class RecommendationsScreen extends StatelessWidget {
         }
       }
     }
+
     for (var i = 0; i < recommendedPosts.length; i++) {
       for (var j = i + 1; j < recommendedPosts.length; j++) {
         if (recommendedPosts[i].postID == recommendedPosts[j].postID) {
@@ -36,22 +37,44 @@ class RecommendationsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Recommendations"),
       ),
-      body: ListView.builder(
-        itemCount: recommendedPosts.length,
-        itemBuilder: (context, index) {
-          return PostItem(
-            currentScreen: CurrentScreen.overviewScreen,
-            title: recommendedPosts[index].title,
-            postID: recommendedPosts[index].postID,
-            body: recommendedPosts[index].body,
-            userId: recommendedPosts[index].userID,
-            postTime: recommendedPosts[index].postTime,
-            price: recommendedPosts[index].price,
-            username: recommendedPosts[index].username,
-            imageUrls: recommendedPosts[index].imageUrls,
-            tags: recommendedPosts[index].tags,
-          );
-        },
+      body: Column(
+        children: [
+          if (recommendedPosts.isEmpty)
+            SizedBox(
+              height: 10,
+            ),
+          if (recommendedPosts.isEmpty)
+            Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "What is on your mind today? Like a post in the store to let us make recommendations for you.",
+                  textAlign: TextAlign.center,
+                )),
+          if (recommendedPosts.isEmpty)
+            SizedBox(
+              height: 10,
+            ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: recommendedPosts.length,
+              itemBuilder: (context, index) {
+                return PostItem(
+                  currentScreen: CurrentScreen.overviewScreen,
+                  title: recommendedPosts[index].title,
+                  postID: recommendedPosts[index].postID,
+                  body: recommendedPosts[index].body,
+                  userId: recommendedPosts[index].userID,
+                  postTime: recommendedPosts[index].postTime,
+                  price: recommendedPosts[index].price,
+                  username: recommendedPosts[index].username,
+                  imageUrls: recommendedPosts[index].imageUrls,
+                  tags: recommendedPosts[index].tags,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
