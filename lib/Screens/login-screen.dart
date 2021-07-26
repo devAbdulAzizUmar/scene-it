@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isPassObscured = true;
   bool _remember = false;
   bool _isLoading = false;
-  final storage = FlutterSecureStorage();
+  // final storage = FlutterSecureStorage();
   String _token;
   final _formKey = GlobalKey<FormState>();
 
@@ -63,12 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
         CurrentUser.mobileNumber = responseBody["user"]["mobileNumber"];
         CurrentUser.id = responseBody["user"]["id"];
 
-        await storage.write(key: "token", value: _token);
+        // await storage.write(key: "token", value: _token);
 
         print(jsonDecode(response.body));
 
         if (_remember) {
-          await storage.write(key: "token", value: _token);
+          // await storage.write(key: "token", value: _token);
         }
 
         Navigator.of(context).pushReplacementNamed(AdsOverviewScreen.routeName);
