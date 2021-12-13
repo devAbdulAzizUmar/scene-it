@@ -1,16 +1,7 @@
-# first_app
+# scene_it
 
-A new Flutter project.
+A digital gallery app in flutter.
 
-## Getting Started
+## Introduction
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is a university project created by three Computer Science students in Islamabad, Pakistan. The purpose of the app is to create an online gallery for art shoppers and creators. The app provides a way for buyers to see the paintings on their walls before they make the purchase. This is done using Augmented Reality.
